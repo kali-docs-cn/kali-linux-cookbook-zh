@@ -76,7 +76,7 @@
     fierce -dns adomainnameontheinternet.com
     ```
 
-        > 请不要在不属于你的公共网站或者不是你自己的服务器上运行这个工具。这里我们将`adomainnameontheinternet.com`作为一个例子，你应该替换掉这个目标。要当心！
+    > 请不要在不属于你的公共网站或者不是你自己的服务器上运行这个工具。这里我们将`adomainnameontheinternet.com`作为一个例子，你应该替换掉这个目标。要当心！
 
 9.  为了以指定的词语列表进行相同的操作，键入以下命令：
 
