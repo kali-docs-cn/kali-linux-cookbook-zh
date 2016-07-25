@@ -89,3 +89,48 @@ Kali Linux，简称Kali，是用于安全攻击的最新Linux发行版。它是B
 6.  祝贺你现在完成了Kali Linux的安装！点击`Continue`，系统会重启并展示登录界面。
 
     ![](img/1-1-16.jpg)
+
+## 1.2 安装到U盘或持久存储器中
+
+Kali Linux U盘能够持久化储存系统设置，以及在U盘中永久升级和安装新的软件包，并让我们将个人定制的Kali Linux随时带在身上。
+
+多亏了Win32 Disk Imager，我们可以为大多数Linux发行版创建可启动的U盘，包括持久化存储的Kali Linux。
+
+### 准备
+
+需要下列工具和准备工作以继续：
+
++ FAT32格式的U盘，最小8GB。
++ Kali Linux ISO镜像。
++ [Win32 Disk Imager](http://sourceforge.net/projects/win32diskimager/)。
++ 你可以从[这里](http://www.kali.org/downloads/)下载Kali。
+
+### 操作步骤
+
+让我们开始讲Kali Linux安装到U盘：
+
+1.  插入格式化且可写入的U盘：
+
+    ![](img/1-2-1.jpg)
+
+2.  启动 Win32 Disk Imager。
+
+    ![](img/1-2-2.jpg)
+
+3.  点击目录图表，选择Kali Linux DVD ISO镜像的位置：
+
+    ![](img/1-2-3.jpg)
+
+4.  确保“Space used to preserve files across reboots”（用于在启动中保存文件的空间）设置为4096。
+
+    ![](img/1-2-4.jpg)
+
+5.  选择我们的U盘，并点击OK按钮来开始创建可启动的U盘：
+
+    ![](img/1-2-5.jpg)
+
+6.  当它解压并复制DVD的文件到U盘，以及安装bootloader时，这个过程会花一些时间来完成。
+
+7.  安装完成之后，我们就可以重启电脑，从新创建的Kali Linux U盘以持久存储器来启动了。
+
+    ![](img/1-2-6.jpg)
