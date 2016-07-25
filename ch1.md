@@ -134,3 +134,66 @@ Kali Linux U盘能够持久化储存系统设置，以及在U盘中永久升级�
 7.  安装完成之后，我们就可以重启电脑，从新创建的Kali Linux U盘以持久存储器来启动了。
 
     ![](img/1-2-6.jpg)
+
+## 1.3 在 VirtualBox 中安装
+
+这个秘籍会引导你使用知名的开源虚拟机软件VirtualBox，将Kali Linux安装在一个完全分离的客户操作系统中，它在你的宿主操作系统中。
+
+### 准备
+
+需要满足下列要求：
+
++ [VirtualBox](https://www.virtualbox.org/wiki/Downloads) 的最新版本（本书编写时为4.2.16）。
++ Kali Linux ISO 镜像的副本。你可以在[这里](http://www. Kali.org/downloads/)下载。
+
+### 操作步骤
+
+让我们在VirtualBox中安装Kali Linux：
+
+1.  运行VirtualBox，点击“New”（新建）来启动虚拟机向导：
+
+    ![](img/1-3-1.jpg)
+
+2.  点击“Next”（下一步）按钮，键入虚拟机的名称，并选择OS类型和版本。这里我们选择Linux类型和Ubuntu（64位）作为版本。点击“Next”按钮来继续：
+
+    ![](img/1-3-2.jpg)
+
+3.  选择分配给虚拟机的基本内存（RAM）的总数。我们打算使用默认值，点击“Next”。
+
+4.  为新的虚拟机创建新的虚拟硬盘，点击“Next”按钮。
+
+    ![](img/1-3-3.jpg)
+
+5.  一个新的想到窗口将会打开，保留默认的VDI文件类型，因为我们并不需要使用其它的虚拟机软件。
+
+6.  我们会保留默认选项作为虚拟机底盘存储的详情。点击“Next”来继续：
+
+7.  设置虚拟机磁盘文件类型和大小：
+
+    ![](img/1-3-4.jpg)
+
+8.  检查设置是否正确，只有点击“Create”（创建）按钮来开始虚拟磁盘文件的创建。
+
+9.  我们将会返回前面的向导，带有虚拟机参数的概览。点击“Create”以结束：
+
+    ![](img/1-3-5.jpg)
+
+0.  新的虚拟机创建之后，我们将要安装Kali Linux。
+
+1.  在VirtualBox的主窗口，高亮Kali Linux，之后点击“Settings”（设置）按钮：
+
+    ![](img/1-3-6.jpg)
+
+2.  现在基本的安装步骤就完成了，我们需要让你将下载的ISO文件用于虚拟光盘。这会为你节省烧录物理DVD的时间来完成这个安装。在“Settings”界面中，点击“Storage”（存储器）菜单选项：
+
+    ![](img/1-3-7.jpg)
+
+3.  下一步，在“Storage Tree”（存储器树形图）下面，高亮“Empty”（空）磁盘图标，它在“IDE Controller”（IDE控制器）的下面。这户选择我们的虚拟CD/DVD ROM驱动器。在屏幕的最右边，在
+“Attributes”底下，点击光盘图表。在上面弹出的菜单上选择你的“Choose a virtual CD/DVD disc file...”（Kali Linux ISO CD/DVD光盘文件）选项，并找到你的ISO。一旦你完成了这些步骤，点击OK按钮。
+
+    ![](img/1-3-8.jpg)
+
+4.  点击Start（开始）按钮，之后点击里面的新窗口来进行安装。安装步骤在1.1节中已经包括了。
+
+    > 安装VirtualBox 扩展包也允许我们通过添加USB2.0（EHCI）、VirtualBox RDP和 Intel PXE boot ROM的支持，来扩展虚拟机的功能。
+    
