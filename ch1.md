@@ -115,25 +115,22 @@ Kali Linux U盘能够持久化储存系统设置，以及在U盘中永久升级�
 
 2.  启动 Win32 Disk Imager。
 
-    ![](img/1-2-2.jpg)
-
 3.  点击目录图表，选择Kali Linux DVD ISO镜像的位置：
 
-    ![](img/1-2-3.jpg)
+    ![](img/1-2-2.jpg)
 
 4.  确保“Space used to preserve files across reboots”（用于在启动中保存文件的空间）设置为4096。
 
-    ![](img/1-2-4.jpg)
+    ![](img/1-2-3.jpg)
 
 5.  选择我们的U盘，并点击OK按钮来开始创建可启动的U盘：
 
-    ![](img/1-2-5.jpg)
 
 6.  当它解压并复制DVD的文件到U盘，以及安装bootloader时，这个过程会花一些时间来完成。
 
 7.  安装完成之后，我们就可以重启电脑，从新创建的Kali Linux U盘以持久存储器来启动了。
 
-    ![](img/1-2-6.jpg)
+    ![](img/1-2-4.jpg)
 
 ## 1.3 在 VirtualBox 中安装
 
@@ -196,7 +193,7 @@ Kali Linux U盘能够持久化储存系统设置，以及在U盘中永久升级�
 4.  点击Start（开始）按钮，之后点击里面的新窗口来进行安装。安装步骤在1.1节中已经包括了。
 
     > 安装VirtualBox 扩展包也允许我们通过添加USB2.0（EHCI）、VirtualBox RDP和 Intel PXE boot ROM的支持，来扩展虚拟机的功能。
-    
+
 ## 1.4 安装  VMware Tools
 
 这个秘籍中，我们会展示如何使用 VMware Tools将Kali Linux安装在虚拟机中。
@@ -217,9 +214,9 @@ Kali Linux U盘能够持久化储存系统设置，以及在U盘中永久升级�
     ```
     prepare-kernel-sources
     ```
-    
+
     > 这些命令假设你使用Linux或者Mac OS。你不需要在Windows下执行它们。
-    
+
 2.  在VMware Workstaion的菜单栏上，访问“VM | Install VMware Tools…”：
 
     ![](img/1-4-1.jpg)
@@ -229,22 +226,22 @@ Kali Linux U盘能够持久化储存系统设置，以及在U盘中永久升级�
     ```
     cp /media/VMware\ Tools/VMwareTools-8.8.2-590212.tar.gz /tmp/; cd /tmp
     ```
-    
+
     > 根据你的VMware Tools来替换文件名：`VMwareTools-<version>-<build>.tar.gz`。
-    
+
 4.  使用以下命令解压并安装：
 
     ```
-    tar zxpf VMwareTools-8.8.2-590212.tar.gz 
+    tar zxpf VMwareTools-8.8.2-590212.tar.gz
     ```
-    
+
 5.  进入VMware Tools的目录中，之后运行安装工具：
 
     ```
-    cd vmware-tools-distrib/ 
+    cd vmware-tools-distrib/
     ./vmware-install.pl
     ```
-    
+
 6.  按下回车键来接受每个配置询问的默认值；`vmware-config-tools.pl`脚本同上。
 
 7.  最后重启系统，工作就完成了。
@@ -284,65 +281,65 @@ Kali Linux 自带了多种网络服务，它们在多种情况下可能很实用
     ```
     service apache2 start
     ```
-    
+
     我们可以通过浏览本地地址来验证服务器是否打开。
-    
+
 2.  为了启动SSH服务，首次需要生成SSH密钥：
 
     ```
-    sshd-generate 
+    sshd-generate
     ```
-    
+
 3.  启动SSH服务器：
 
     ```
     service ssh start
     ```
-    
+
 4.  使用`netstat`命令来验证服务器是否开启并正在监听：
 
     ```
     netstat -tpan | grep 22
     ```
-    
+
 5.  启动FTP服务器：
 
     ```
     service pure-ftpd start
     ```
-    
+
 6.  使用下列命令来验证FTP服务器：
 
     ```
     netstat -ant | grep 21
     ```
-    
+
     > 你也可以使用` ps-ef | grep 21 `命令。
-    
+
 7.  使用下列命令来停止服务：
 
     ```
     service <servicename> stop
     ```
-    
+
     其中`<servicename>`代表我们希望停止的网络服务，例如：
-    
+
     ```
     service apache2 stop
     ```
-    
+
 8.  使用下列命令来在开机时启用服务：
 
     ```
     update-rc.d –f <servicename> defaults
     ```
-    
+
     其中`<servicename>`代表打算启动的网络服务，例如：
-    
+
     ```
     update-rc.d –f ssh defaults
     ```
-    
+
     > 你也可以在Kali Linux中通过Services（服务）菜单来完成它。从Start（开始）菜单开始，访问“ Kali Linux | Services”。
 
 ## 1.7 设置无线网络
@@ -358,11 +355,11 @@ Kali Linux 自带了多种网络服务，它们在多种情况下可能很实用
     ```
     wicd-gtk --no-tray
     ```
-    
+
 2.  Wicd Network Manager会打开，并带有可用网络的列表：
 
     ![](img/1-7-1.jpg)
-    
+
 3.  点击Properties（属性）按钮来设定网络细节。完成之后点击OK。
 
     ![](img/1-7-2.jpg)
