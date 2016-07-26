@@ -1,12 +1,18 @@
 # 第一章 安装和启动Kali
 
+> 作者：Willie L. Pritchett, David De Smet
+
+> 译者：[飞龙](https://github.com/)
+
+> 协议：[CC BY-NC-SA 4.0](http://creativecommons.org/licenses/by-nc-sa/4.0/)
+
 ## 简介
 
 Kali Linux，简称Kali，是用于安全攻击的最新Linux发行版。它是BackTrack Linux的后继者。不像多数Linux发行版那样，Kali Linux用于渗透测试。渗透测试是一种通过模拟攻击评估计算机系统或网络安全性的方法。在整本书中，我们将会探索一些Kali Linux所提供的工具。
 
 这一章涉及到Kali Linux在不同场景下的的安装和启动，从插入Kali Linux DVD到配置网络。
 
-对于本书中所有秘籍，我们都要使用带有64为GNOME作为窗口管理器（WM）和架构的Kali Linux（[(http://www.Kali.org/ downloads/]((http://www.Kali.org/ downloads/)）。然而，使用KDE作为WM的用法并不在这本书里设计，你应该能够遵循这些秘籍，并没有多少问题。
+对于本书中所有秘籍，我们都要使用带有64为GNOME作为窗口管理器（WM）和架构的Kali Linux（[http://www.Kali.org/downloads/](http://www.Kali.org/downloads/)）。然而，使用KDE作为WM的用法并不在这本书里设计，你应该能够遵循这些秘籍，并没有多少问题。
 
 ## 1.1 安装到硬盘
 
