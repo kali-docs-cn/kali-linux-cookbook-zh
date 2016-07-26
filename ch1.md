@@ -137,7 +137,7 @@ Kali Linux U盘能够持久化储存系统设置，以及在U盘中永久升级�
 
 ## 1.3 在 VirtualBox 中安装
 
-这个秘籍会引导你使用知名的开源虚拟机软件VirtualBox，将Kali Linux安装在一个完全分离的客户操作系统中，它在你的宿主操作系统中。
+这个秘籍会引导你使用知名的开源虚拟机软件VirtualBox，将Kali Linux安装在一个完全分离的访客操作系统中，它在你的宿主操作系统中。
 
 ### 准备
 
@@ -197,3 +197,70 @@ Kali Linux U盘能够持久化储存系统设置，以及在U盘中永久升级�
 
     > 安装VirtualBox 扩展包也允许我们通过添加USB2.0（EHCI）、VirtualBox RDP和 Intel PXE boot ROM的支持，来扩展虚拟机的功能。
     
+## 1.4 安装  VMware Tools
+
+这个秘籍中，我们会展示如何使用 VMware Tools将Kali Linux安装在虚拟机中。
+
+### 准备
+
+需要满足下列要求：
+
++ 已经安装好的Kali Linux VMware 虚拟机。
++ 网络连接。
+
+### 操作步骤
+
+让我开始将Kali Linux 安装到 VMware上：
+
+1.  打开你的虚拟机的访客操作系统并连接到互联网，之后打开Terminal（终端）窗口，并键入下列命令来准备核心资源：
+
+    ```
+    prepare-kernel-sources
+    ```
+    
+    > 这些命令假设你使用Linux或者Mac OS。你不需要在Windows下执行它们。
+    
+2.  在VMware Workstaion的菜单栏上，访问“VM | Install VMware Tools…”：
+
+    ![](img/1-4-1.jpg)
+
+3.  将VMware Tools安装工具复制到临时目录下，之后将当前位置改为目标目录：
+
+    ```
+    cp /media/VMware\ Tools/VMwareTools-8.8.2-590212.tar.gz /tmp/; cd /tmp
+    ```
+    
+    > 根据你的VMware Tools来替换文件名：`VMwareTools-<version>-<build>.tar.gz`。
+    
+4.  使用以下命令解压并安装：
+
+    ```
+    tar zxpf VMwareTools-8.8.2-590212.tar.gz 
+    ```
+    
+5.  进入VMware Tools的目录中，之后运行安装工具：
+
+    ```
+    cd vmware-tools-distrib/ 
+    ./vmware-install.pl
+    ```
+    
+6.  按下回车键来接受每个配置询问的默认值；`vmware-config-tools.pl`脚本同上。
+
+7.  最后重启系统，工作就完成了。
+
+### 工作原理
+
+在第一步中，我们准备好了核心资源。之后，我们向访客操作系统插入了虚拟的 VMware Tools CD 。接着，我们创建了挂载点，并挂载虚拟CD。我们在临时目录中复制并解压了安装工具。最后我们保留默认配置来运行安装工具。
+
+## 1.5 修复启动画面
+
+我们首次启动新安装的Kali Linux系统时，会注意到启动画面消失了。为了手动修复它，我们需要解压`Initrd`，修改它，之后将它再次压缩。幸运的是，有一个由 Mati Aharoni（也称为“muts”，Kali Linux的创造者）编写的自动化bash脚本使这件事变得容易。
+
+### 操作步骤
+
+键入下列命令并且按下回车键来修复消失的启动画面：
+
+```
+fix-splash
+```
