@@ -210,7 +210,7 @@ Kali Linux U盘能够持久化储存系统设置，以及在U盘中永久升级�
 
 ### 操作步骤
 
-让我开始将Kali Linux 安装到 VMware上：
+让我们开始将Kali Linux 安装到 VMware上：
 
 1.  打开你的虚拟机的访客操作系统并连接到互联网，之后打开Terminal（终端）窗口，并键入下列命令来准备核心资源：
 
@@ -264,3 +264,111 @@ Kali Linux U盘能够持久化储存系统设置，以及在U盘中永久升级�
 ```
 fix-splash
 ```
+
+## 1.6 启动网络服务
+
+Kali Linux 自带了多种网络服务，它们在多种情况下可能很实用，并且默认是禁用的。这个秘籍中，我们会涉及到通过多种方法设置和启动每个服务的步骤。
+
+### 准备
+
+需要满足下列要求以继续：
+
++ 带有有效IP地址的网络连接。
+
+### 操作步骤
+
+让我们开始启动默认服务：
+
+1.  启动Apache服务器：
+
+    ```
+    service apache2 start
+    ```
+    
+    我们可以通过浏览本地地址来验证服务器是否打开。
+    
+2.  为了启动SSH服务，首次需要生成SSH密钥：
+
+    ```
+    sshd-generate 
+    ```
+    
+3.  启动SSH服务器：
+
+    ```
+    service ssh start
+    ```
+    
+4.  使用`netstat`命令来验证服务器是否开启并正在监听：
+
+    ```
+    netstat -tpan | grep 22
+    ```
+    
+5.  启动FTP服务器：
+
+    ```
+    service pure-ftpd start
+    ```
+    
+6.  使用下列命令来验证FTP服务器：
+
+    ```
+    netstat -ant | grep 21
+    ```
+    
+    > 你也可以使用` ps-ef | grep 21 `命令。
+    
+7.  使用下列命令来停止服务：
+
+    ```
+    service <servicename> stop
+    ```
+    
+    其中`<servicename>`代表我们希望停止的网络服务，例如：
+    
+    ```
+    service apache2 stop
+    ```
+    
+8.  使用下列命令来在开机时启用服务：
+
+    ```
+    update-rc.d –f <servicename> defaults
+    ```
+    
+    其中`<servicename>`代表打算启动的网络服务，例如：
+    
+    ```
+    update-rc.d –f ssh defaults
+    ```
+    
+    > 你也可以在Kali Linux中通过Services（服务）菜单来完成它。从Start（开始）菜单开始，访问“ Kali Linux | Services”。
+
+## 1.7 设置无线网络
+
+最后，我们来到了这一章的最后一个秘籍。这个秘籍中，我们会了解在开启安全状态下连接无线网络的步骤，通过Wicd Network Manager和提供加密的细节。无线网络的设置允许我们以无线方式使用Kali Linux。在真实的、合乎道德的渗透测试中，我们可以不依赖于网线而自由地使用所有常规桌面。
+
+### 操作步骤
+
+让我们开始设置无线网络：
+
+1.  从桌面启动网络管理器，通过点击Applications（应用）菜单并且访问“Internet | Wicd Network Manager”，或者在终端窗口中键入下列命令：
+
+    ```
+    wicd-gtk --no-tray
+    ```
+    
+2.  Wicd Network Manager会打开，并带有可用网络的列表：
+
+    ![](img/1-7-1.jpg)
+    
+3.  点击Properties（属性）按钮来设定网络细节。完成之后点击OK。
+
+    ![](img/1-7-2.jpg)
+
+4.  最后，点击Connect（连接）按钮，就完成了。
+
+### 工作原理
+
+这个秘籍中，我们总结了无线网络的设置方式。这个秘籍以启动网络管理器，和连接到我们的路由器作为开始。
