@@ -12,7 +12,7 @@ Kali Linux，简称Kali，是用于安全攻击的最新Linux发行版。它是B
 
 这一章涉及到Kali Linux在不同场景下的的安装和启动，从插入Kali Linux DVD到配置网络。
 
-对于本书中所有秘籍，我们都要使用带有64为GNOME作为窗口管理器（WM）和架构的Kali Linux（[http://www.Kali.org/downloads/](http://www.Kali.org/downloads/)）。然而，使用KDE作为WM的用法并不在这本书里设计，你应该能够遵循这些秘籍，并没有多少问题。
+对于本书中所有秘籍，我们都要使用以64位GNOME作为窗口管理器（WM）和架构的Kali Linux（[http://www.Kali.org/downloads/](http://www.Kali.org/downloads/)）。然而，使用KDE作为WM的用法并不在这本书里涉及，你应该能够遵循这些秘籍，并没有多少问题。
 
 ## 1.1 安装到硬盘
 
@@ -22,7 +22,7 @@ Kali Linux，简称Kali，是用于安全攻击的最新Linux发行版。它是B
 
 ### 准备
 
-在解释真个过程之前，需要满足以下要求：
+在解释整个过程之前，需要满足以下要求：
 
 + 为KaliLinux的安装准备最小8GB的空闲磁盘空间（然而我们推荐至少25GB来存放这本书中额外的程序和生成的词汇表）。
 + 最小512MB的内存。
@@ -125,7 +125,7 @@ Kali Linux U盘能够持久化储存系统设置，以及在U盘中永久升级�
 
     ![](img/1-2-2.jpg)
 
-4.  确保“Space used to preserve files across reboots”（用于在启动中保存文件的空间）设置为4096。
+4.  确保`Space used to preserve files across reboots`（用于在启动中保存文件的空间）设置为4096。
 
     ![](img/1-2-3.jpg)
 
@@ -153,46 +153,46 @@ Kali Linux U盘能够持久化储存系统设置，以及在U盘中永久升级�
 
 让我们在VirtualBox中安装Kali Linux：
 
-1.  运行VirtualBox，点击“New”（新建）来启动虚拟机向导：
+1.  运行VirtualBox，点击`New`（新建）来启动虚拟机向导：
 
     ![](img/1-3-1.jpg)
 
-2.  点击“Next”（下一步）按钮，键入虚拟机的名称，并选择OS类型和版本。这里我们选择Linux类型和Ubuntu（64位）作为版本。点击“Next”按钮来继续：
+2.  点击`Next`（下一步）按钮，键入虚拟机的名称，并选择OS类型和版本。这里我们选择Linux类型和Ubuntu（64位）作为版本。点击`Next`按钮来继续：
 
     ![](img/1-3-2.jpg)
 
-3.  选择分配给虚拟机的基本内存（RAM）的总数。我们打算使用默认值，点击“Next”。
+3.  选择分配给虚拟机的基本内存（RAM）的总数。我们打算使用默认值，点击`Next`。
 
-4.  为新的虚拟机创建新的虚拟硬盘，点击“Next”按钮。
+4.  为新的虚拟机创建新的虚拟硬盘，点击`Next`按钮。
 
     ![](img/1-3-3.jpg)
 
-5.  一个新的想到窗口将会打开，保留默认的VDI文件类型，因为我们并不需要使用其它的虚拟机软件。
+5.  一个新的向导窗口将会打开，保留默认的VDI文件类型，因为我们并不需要使用其它的虚拟机软件。
 
-6.  我们会保留默认选项作为虚拟机底盘存储的详情。点击“Next”来继续：
+6.  我们会保留默认选项作为虚拟机磁盘存储的详情。点击`Next`来继续：
 
 7.  设置虚拟机磁盘文件类型和大小：
 
     ![](img/1-3-4.jpg)
 
-8.  检查设置是否正确，只有点击“Create”（创建）按钮来开始虚拟磁盘文件的创建。
+8.  检查设置是否正确，之后点击`Create`（创建）按钮来开始虚拟磁盘文件的创建。
 
-9.  我们将会返回前面的向导，带有虚拟机参数的概览。点击“Create”以结束：
+9.  我们将会返回前面的向导，带有虚拟机参数的概览。点击`Create`以结束：
 
     ![](img/1-3-5.jpg)
 
 0.  新的虚拟机创建之后，我们将要安装Kali Linux。
 
-1.  在VirtualBox的主窗口，高亮Kali Linux，之后点击“Settings”（设置）按钮：
+1.  在VirtualBox的主窗口，高亮Kali Linux，之后点击`Settings`（设置）按钮：
 
     ![](img/1-3-6.jpg)
 
-2.  现在基本的安装步骤就完成了，我们需要让你将下载的ISO文件用于虚拟光盘。这会为你节省烧录物理DVD的时间来完成这个安装。在“Settings”界面中，点击“Storage”（存储器）菜单选项：
+2.  现在基本的安装步骤就完成了，我们需要让你将下载的ISO文件用于虚拟光盘。这会为你节省烧录物理DVD的时间来完成这个安装。在`Settings`界面中，点击`Storage`（存储器）菜单选项：
 
     ![](img/1-3-7.jpg)
 
-3.  下一步，在“Storage Tree”（存储器树形图）下面，高亮“Empty”（空）磁盘图标，它在“IDE Controller”（IDE控制器）的下面。这户选择我们的虚拟CD/DVD ROM驱动器。在屏幕的最右边，在
-“Attributes”底下，点击光盘图表。在上面弹出的菜单上选择你的“Choose a virtual CD/DVD disc file...”（Kali Linux ISO CD/DVD光盘文件）选项，并找到你的ISO。一旦你完成了这些步骤，点击OK按钮。
+3.  下一步，在`Storage Tree`（存储器树形图）下面，高亮`Empty`（空）磁盘图标，它在`IDE Controller`（IDE控制器）的下面。这户选择我们的虚拟CD/DVD ROM驱动器。在屏幕的最右边，在
+`Attributes`底下，点击光盘图表。在上面弹出的菜单上选择你的`Choose a virtual CD/DVD disc file...`（Kali Linux ISO CD/DVD光盘文件）选项，并找到你的ISO。一旦你完成了这些步骤，点击OK按钮。
 
     ![](img/1-3-8.jpg)
 
@@ -215,7 +215,7 @@ Kali Linux U盘能够持久化储存系统设置，以及在U盘中永久升级�
 
 让我们开始将Kali Linux 安装到 VMware上：
 
-1.  打开你的虚拟机的访客操作系统并连接到互联网，之后打开Terminal（终端）窗口，并键入下列命令来准备核心资源：
+1.  打开你的虚拟机的访客操作系统并连接到互联网，之后打开`Terminal`（终端）窗口，并键入下列命令来准备核心资源：
 
     ```
     prepare-kernel-sources
@@ -223,7 +223,7 @@ Kali Linux U盘能够持久化储存系统设置，以及在U盘中永久升级�
 
     > 这些命令假设你使用Linux或者Mac OS。你不需要在Windows下执行它们。
 
-2.  在VMware Workstaion的菜单栏上，访问“VM | Install VMware Tools…”：
+2.  在VMware Workstaion的菜单栏上，访问`VM | Install VMware Tools…`：
 
     ![](img/1-4-1.jpg)
 
@@ -346,17 +346,17 @@ Kali Linux 自带了多种网络服务，它们在多种情况下可能很实用
     update-rc.d –f ssh defaults
     ```
 
-    > 你也可以在Kali Linux中通过Services（服务）菜单来完成它。从Start（开始）菜单开始，访问“ Kali Linux | Services”。
+    > 你也可以在Kali Linux中通过`Services`（服务）菜单来完成它。从`Start`（开始）菜单开始，访问`Kali Linux | Services`。
 
 ## 1.7 设置无线网络
 
-最后，我们来到了这一章的最后一个秘籍。这个秘籍中，我们会了解在开启安全状态下连接无线网络的步骤，通过Wicd Network Manager和提供加密的细节。无线网络的设置允许我们以无线方式使用Kali Linux。在真实的、合乎道德的渗透测试中，我们可以不依赖于网线而自由地使用所有常规桌面。
+最后，我们来到了这一章的最后一个秘籍。这个秘籍中，我们会了解在安全状态下的无线网络连接步骤，通过Wicd Network Manager和提供加密的细节。无线网络的设置允许我们以无线方式使用Kali Linux。在真实的、合乎道德的渗透测试中，我们可以不依赖于网线而自由地使用所有常规桌面。
 
 ### 操作步骤
 
 让我们开始设置无线网络：
 
-1.  从桌面启动网络管理器，通过点击Applications（应用）菜单并且访问“Internet | Wicd Network Manager”，或者在终端窗口中键入下列命令：
+1.  从桌面启动网络管理器，通过点击`Applications`（应用）菜单并且访问`Internet | Wicd Network Manager`，或者在终端窗口中键入下列命令：
 
     ```
     wicd-gtk --no-tray
@@ -366,11 +366,11 @@ Kali Linux 自带了多种网络服务，它们在多种情况下可能很实用
 
     ![](img/1-7-1.jpg)
 
-3.  点击Properties（属性）按钮来设定网络细节。完成之后点击OK。
+3.  点击`Properties`（属性）按钮来设定网络细节。完成之后点击OK。
 
     ![](img/1-7-2.jpg)
 
-4.  最后，点击Connect（连接）按钮，就完成了。
+4.  最后，点击`Connect`（连接）按钮，就完成了。
 
 ### 工作原理
 
