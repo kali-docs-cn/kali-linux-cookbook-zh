@@ -368,7 +368,75 @@
 > pyrit benchmark
 > ```
 
-## 2.5 配置ProxyChains
+## 2.5 升级和配置额外的安全工具
+
+这个秘籍中，我们会涉及到升级Kali，以及配置一些额外的工具，它们对于之后的章节和秘籍十分实用。由于Kali的包在发布之间会不断升级，你很快就会发现比起之前在你的DVD中下载好的工具，又提供了一系列新的工具。我们会以升级来开始，之后获得Nessus的激活码，并以安装Squid来结束。
+
+### 操作步骤
+
+让我们开始进行升级，以及配置额外的安全工具。
+
+1.  使用仓库中最新的修改来更新本地的包索引：
+
+    ```
+    apt-get update
+    ```
+    
+2.  升级现有的包：
+
+    ```
+    apt-get upgrade
+    ```
+    
+3.  升级到最新版本（如果可用的话）：
+
+    ```
+    apt-get dist-upgrade
+    ```
+    
+4.  获得Nessus的激活码，通过在[这里]( http://www.nessus.org/ products/nessus/nessus-plugins/obtain-an-activation-code)注册。
+
+5.  通过执行下列命令来激活Nessus：
+
+    ```
+    /opt/nessus/bin/nessus-fetch --register A60F-XXXX-XXXX-XXXX-0006 
+    ```
+    
+    其中`A60F-XXXX-XXXX-XXXX-0006`应为你的激活码。
+    
+6.  为Nessus Web界面创建账户：
+
+    ```
+    /opt/nessus/sbin/nessus-adduser
+    ```
+    
+7.  为了启动Nessus服务器，我们只需要执行下列命令：
+
+    ```
+    /etc/init.d/nessusd start
+    ```
+    
+8.  安装Squid：
+
+    ```
+    apt-get install squid3 
+    ```
+    
+9.  阻止Squid在启动时自动运行：
+
+    ```
+    update-rc.d -f squid3 remove
+    ```
+    
+> 为了在仓库中找到特定的包，我们可以在`apt-get update`之后使用下列命令：
+
+> ```
+> apt-cache search <keyword> 
+> ```
+
+> 其中`<keyword>`是包名称或者正则表达式。
+
+## 2.6 配置ProxyChains
 
 这个章节中，我们会强制指定应用的网络连接使用用户定义的代理列表，来打破接受者和发送者之间的直接连接。
 
@@ -382,11 +450,11 @@
     
 2.  解除我们打算使用的链接类型的注释，这里是`dynamic_chain`：
 
-    !{](img/2-5-1.jpg)
+    !{](img/2-6-1.jpg)
     
 3.  向列表中添加一些代理服务器：
 
-    !{](img/2-5-2.jpg)
+    !{](img/2-6-2.jpg)
 
 4.  使用我们的链式代理来解析目标主机：
 
@@ -400,7 +468,7 @@
     proxychains msfconsole
     ```
     
-## 2.6 目录加密
+## 2.7 目录加密
 
 这一章的最后一个秘籍关于信息隐私。我们会使用TrueCrypt通过密钥来隐藏重要和私密的数字信息，远离公众的眼睛。
 
@@ -408,13 +476,13 @@
 
 1.  通过访问`Applications Menu | Kali | Forensics | Digital Anti Forensics | install truecrypt`来安装TrueCrypt。
 
-    ![](img/2-6-1.jpg)
+    ![](img/2-7-1.jpg)
     
     点击`Install TrueCrypt`（安装TrueCrypt）并且遵循屏幕上的指导。
     
 2.  从`Applications Menu | Kali Linux | Forensics | Digital Anti Forensics | truecrypt`运行TrueCrypt，你会看到下面的窗口：
 
-    ![](img/2-6-2.jpg)
+    ![](img/2-7-2.jpg)
 
 3.  点击`Create Volume`（新建卷）来启动`TrueCrypt Volume Creation Wizard`（TrueCrypt卷创建向导）。
 
@@ -424,7 +492,7 @@
 
 6.  点击`Select File…`（选择文件）按钮并为新的TrueCrypt卷指定名称和路径。完成后点击`Save`（保存）。
 
-    ![](img/2-6-3.jpg)
+    ![](img/2-7-3.jpg)
 
 7.  点击`Next`按钮并选择打算使用的加密和哈希算法。
 
@@ -446,7 +514,7 @@
 
 6.  点击`Mount`（挂载）并键入我们的密码，完成后点击`OK`。
 
-    ![](img/2-6-4.jpg)
+    ![](img/2-7-4.jpg)
 
 7.  我们现在可以通过在槽上双击或通过挂载目录来访问卷，以及在里面保存文件。当我们完成之后，只需要点击`Dismount All`（解除所有挂载）。
 
