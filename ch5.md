@@ -226,20 +226,18 @@ Nessus 允许我们攻击很多种类的漏洞，它们取决于我们的版本�
     ![](img/5-3-1.jpg)
     
 4.  在`General`标签页，进行如下操作：
-
-    1.  在` Settings Type`中选择` Basic`。
     
-    2.  为你的扫描输入一个名称。我们选择了`Internal Network Scan`，但你可以选择想要的其它名称。
+    1.  为你的扫描输入一个名称。我们选择了`Internal Network Scan`，但你可以选择想要的其它名称。
     
-    3.  有两个可见性的选择：‘
+    2.  有两个可见性的选择：‘
     
         +   `Shared`：其它用户可以利用这次扫描。
         
         +   `Private`：这次扫描只能被你使用。
         
-    4.  其它项目保留默认。
+    3.  其它项目保留默认。
     
-    5.  点击`Update`。
+    4.  点击`Update`。
     
 5.  在`Plugins`标签页中，点击` Disable All `并选择下列特定的漏洞：
     
@@ -309,3 +307,218 @@ Nessus 允许我们攻击很多种类的漏洞，它们取决于我们的版本�
     +   漏洞会详细列出。
     
 3.  点击`Reports`主菜单中的` Download Report `。
+
+## 5.4 发现 Linux 特定漏洞
+
+在这个秘籍中，我们会使用 Nessus 探索如何发现 Linux 特定漏洞。这些漏洞针对网络上运行Linux的主机。
+
+### 准备
+
+为了完成这个秘籍，你需要被测试的虚拟机：
+
++  Metasploitable 2.0 
++  其它 Linux 版本
+
+### 操作步骤
+
+让我们开始使用 Nessus 来发现 Linux 特定漏洞，首先打开 Firefox 浏览器：
+
+1.  在 <https://127.0.0.1:8834> 登录 Nessus。
+
+2.  访问` Policies`。
+
+3.  点击`Add Policy`。
+
+    ![](img/5-4-1.jpg)
+    
+4.  在`General Settings `标签页，进行如下操作：
+    
+    1.  为你的扫描输入一个名称。我们选择了`Linux Vulnerability Scan`，但你可以选择想要的其它名称。
+    
+    2.  有两个可见性的选择：‘
+    
+        +   `Shared`：其它用户可以利用这次扫描。
+        
+        +   `Private`：这次扫描只能被你使用。
+        
+    3.  其它项目保留默认。
+    
+5.  在`Plugins`标签页中，点击` Disable All `并选择下列特定的漏洞。当我们扫描可能在我们的 Linux 目标上运行的服务时，这份列表会变得很长：
+    
+    +   `Backdoors`
+    +   `Brute Force Attacks`
+    +   `CentOS Local Security Checks`
+    +   `DNS`  
+    +   `Debian Local Security Checks`  
+    +   `Default Unix Accounts`  
+    +   `Denial of Service`  
+    +   `FTP`  
+    +   `Fedora Local Security Checks`  
+    +   `Firewalls`  
+    +   `FreeBSD Local Security Checks`  
+    +   `Gain a shell remotely`  
+    +   `General`  
+    +   `Gentoo Local Security Checks`  
+    +   `HP-UX Local Security Checks`  
+    +   `Mandriva Local Security Checks`  
+    +   `Misc`  
+    +   `Port Scanners`  
+    +   `Red Hat Local Security Checks`  
+    +   `SMTP Problems`  
+    +   `SNMP`  
+    +   `Scientific Linux Local Security Checks`  
+    +   `Slackware Local Security Checks`  
+    +   `Solaris Local Security Checks`
+    +   `SuSE Local Security Checks`  
+    +   `Ubuntu Local Security Checks`  
+    +   `Web Servers`
+    
+    ![](img/5-4-2.jpg)
+
+6.  点击`Update`来保存新的策略。
+
+7.  在主菜单中，点击`Scan Queue`菜单选项。
+
+8.  点击`New Scan`按钮并进行如下操作：
+
+    1.  为你的扫描输入名称。如果你一次运行多个扫描，这会非常有用。这是区分当前运行的不同扫描的方式。
+    
+    2.  输入扫描类型：
+    
+        +   `Run Now`：默认开启，这个选项会立即运行扫描。
+        
+        +   `Scehduled`：允许你选择日期和时间来运行扫描。
+        
+        +   `Template`：将扫描设置为模板。
+        
+    3.  选择扫描策略。这里，我们选择之前创建的`Linux Vulnerabilities Scan`策略。
+    
+    4.  选择你的目标，包含下列要点：
+    
+        +   目标必须每行输入一个。
+        
+        +   你也可以在每行输入目标的范围。
+        
+        +   上传目标文件（如果有的话）或选择` Add Target  IP Address`。
+    
+9.  点击`Launch Scan`：
+
+    ![](img/5-4-3.jpg)
+
+0.  你会被要求确认，你的测试将会执行（取决于你选择了多少目标，以及要执行多少测试）。
+
+    ![](img/5-3-4.jpg)
+
+1.  一旦完成了，你会收到一份报告，它在 `Reports`标签页中。
+
+2.  双击报告来分析下列要点：
+    
+    +   每个发现了漏洞的目标会被列出。
+    
+    +   双击 IP 地址来观察端口，和每个端口的问题。
+    
+    +   点击列下方的数字，来获得所发现的特定问题/漏洞的列表。
+    
+    +   漏洞会详细列出。
+    
+3.  点击`Reports`主菜单中的` Download Report `。
+
+## 5.5 Nessus - 发现 Windows 特定的漏洞
+
+在这个秘籍中，我们会使用 Nessus 探索如何发现 Windows 特定漏洞。这些漏洞针对网络上运行 Windows 的主机。
+
+### 准备
+
+为了完成秘籍，你需要被测试的虚拟机：
+
++ Windows XP
++ Windows 7
+
+### 操作步骤
+
+让我们开始使用 Nessus 发现 Windows 特定的漏洞，首先打开 Firefox 浏览器：
+
+1.  在 <https://127.0.0.1:8834> 登录 Nessus。
+
+2.  访问` Policies`。
+
+3.  点击`Add Policy`。
+
+    ![](img/5-5-1.jpg)
+    
+4.  在`General Settings `标签页，进行如下操作：
+    
+    1.  为你的扫描输入一个名称。我们选择了` Windows Vulnerability Scan`，但你可以选择想要的其它名称。
+    
+    2.  有两个可见性的选择：‘
+    
+        +   `Shared`：其它用户可以利用这次扫描。
+        
+        +   `Private`：这次扫描只能被你使用。
+        
+    3.  其它项目保留默认。
+
+    4.  点击`Submit`。
+    
+5.  在`Plugins`标签页中，点击` Disable All `并选择下列特定的漏洞。它们可能出现在 Windows 系统中：
+    
+    +   DNS  Databases  
+    +   Denial of Service  
+    +   FTP  
+    +   SMTP Problems  
+    +   SNMP  Settings  
+    +   Web Servers  
+    +   Windows  
+    +   Windows: Microsoft Bulletins  
+    +   Windows: User management
+    
+    ![](img/5-5-2.jpg)
+
+6.  点击`Submit`来保存新的策略。
+
+7.  在主菜单中，点击`Scan`菜单选项。
+
+8.  点击`Add Scan`按钮并进行如下操作：
+
+    1.  为你的扫描输入名称。如果你一次运行多个扫描，这会非常有用。这是区分当前运行的不同扫描的方式。
+    
+    2.  输入扫描类型：
+    
+        +   `Run Now`：默认开启，这个选项会立即运行扫描。
+        
+        +   `Scehduled`：允许你选择日期和时间来运行扫描。
+        
+        +   `Template`：将扫描设置为模板。
+        
+    3.  选择扫描策略。这里，我们选择之前创建的`Windows Vulnerabilities Scan`策略。
+    
+    4.  选择你的目标，包含下列要点：
+    
+        +   目标必须每行输入一个。
+        
+        +   你也可以在每行输入目标的范围。
+        
+        +   上传目标文件（如果有的话）或选择` Add Target  IP Address`。
+    
+9.  点击`Launch Scan`：
+
+    ![](img/5-5-3.jpg)
+
+0.  你会被要求确认，你的测试将会执行（取决于你选择了多少目标，以及要执行多少测试）。
+
+    ![](img/5-3-4.jpg)
+
+1.  一旦完成了，你会收到一份报告，它在 `Reports`标签页中。
+
+2.  双击报告来分析下列要点：
+    
+    +   每个发现了漏洞的目标会被列出。
+    
+    +   双击 IP 地址来观察端口，和每个端口的问题。
+    
+    +   点击列下方的数字，来获得所发现的特定问题/漏洞的列表。
+    
+    +   漏洞会详细列出。
+    
+3.  点击`Reports`主菜单中的` Download Report `。
+
