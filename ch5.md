@@ -348,29 +348,29 @@ Nessus 允许我们攻击很多种类的漏洞，它们取决于我们的版本�
     +   `Backdoors`
     +   `Brute Force Attacks`
     +   `CentOS Local Security Checks`
-    +   `DNS`  
-    +   `Debian Local Security Checks`  
-    +   `Default Unix Accounts`  
-    +   `Denial of Service`  
-    +   `FTP`  
-    +   `Fedora Local Security Checks`  
-    +   `Firewalls`  
-    +   `FreeBSD Local Security Checks`  
-    +   `Gain a shell remotely`  
-    +   `General`  
-    +   `Gentoo Local Security Checks`  
-    +   `HP-UX Local Security Checks`  
-    +   `Mandriva Local Security Checks`  
-    +   `Misc`  
-    +   `Port Scanners`  
-    +   `Red Hat Local Security Checks`  
-    +   `SMTP Problems`  
-    +   `SNMP`  
-    +   `Scientific Linux Local Security Checks`  
-    +   `Slackware Local Security Checks`  
+    +   `DNS`  
+    +   `Debian Local Security Checks`  
+    +   `Default Unix Accounts`  
+    +   `Denial of Service`  
+    +   `FTP`  
+    +   `Fedora Local Security Checks`  
+    +   `Firewalls`  
+    +   `FreeBSD Local Security Checks`  
+    +   `Gain a shell remotely`  
+    +   `General`  
+    +   `Gentoo Local Security Checks`  
+    +   `HP-UX Local Security Checks`  
+    +   `Mandriva Local Security Checks`  
+    +   `Misc`  
+    +   `Port Scanners`  
+    +   `Red Hat Local Security Checks`  
+    +   `SMTP Problems`  
+    +   `SNMP`  
+    +   `Scientific Linux Local Security Checks`  
+    +   `Slackware Local Security Checks`  
     +   `Solaris Local Security Checks`
-    +   `SuSE Local Security Checks`  
-    +   `Ubuntu Local Security Checks`  
+    +   `SuSE Local Security Checks`  
+    +   `Ubuntu Local Security Checks`  
     +   `Web Servers`
     
     ![](img/5-4-2.jpg)
@@ -462,14 +462,14 @@ Nessus 允许我们攻击很多种类的漏洞，它们取决于我们的版本�
     
 5.  在`Plugins`标签页中，点击` Disable All `并选择下列特定的漏洞。它们可能出现在 Windows 系统中：
     
-    +   DNS  Databases  
-    +   Denial of Service  
-    +   FTP  
-    +   SMTP Problems  
-    +   SNMP  Settings  
-    +   Web Servers  
-    +   Windows  
-    +   Windows: Microsoft Bulletins  
+    +   DNS  Databases  
+    +   Denial of Service  
+    +   FTP  
+    +   SMTP Problems  
+    +   SNMP  Settings  
+    +   Web Servers  
+    +   Windows  
+    +   Windows: Microsoft Bulletins  
     +   Windows: User management
     
     ![](img/5-5-2.jpg)
