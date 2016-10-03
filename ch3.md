@@ -103,6 +103,58 @@
 
     ![](img/3-1-12.jpg)
 
+## 3.2 下载 Windows 靶机
+
+到目前为止，以及可见的未来中，微软的 Windows 系统都是许多个人和企业所选的操作系统。
+
+幸运的是，微软提供了一种方法来获取测试操作系统。
+
+### 准备
+
+需要互联网或内部网络连接来完成这个模块。
+
+### 操作步骤
+
+下载 Windows 靶机的步骤如下所示：
+
+1.  打开浏览器并访问 Microsoft Technet：<http://technet. microsoft.com/en-us/ms376608>。
+
+2.  在屏幕的右侧，点击`Downloads`链接：
+
+    ![](img/3-2-1.jpg)
+    
+3.  在`Download`菜单项中，选择`Evaluate new products`。
+
+4.  在下一个界面中，你可以选择要下载的东西，取决于你想要测试的产品。推荐你选择 Windows Server 2012，Windows 8 和 Windows 7。
+
+    ![](img/3-2-2.jpg)
+    
+5.  一旦你下载了 ISO，请遵循这一章“熟悉VirtualBox”秘籍中的指南。
+
+    
+## 3.3 下载 Linux 靶机
+
+对于多数的面向 Web 的服务器的部署，Linux 是一种备选的操作系统。与 Windows 先比，它的开销相对较低（主流发行版免费），这使它成为多数云主机、PAAS和服务器环境的理想操作系统。
+
+这个秘籍中，我们会示例如何下载多种 Linux 发行版。
+
+### 准备
+
+需要互联网或内部网络连接来完成这个模块。
+
+### 操作步骤
+
+下载 Linux 靶机的步骤如下所示：
+
+1.  打开浏览器并访问 Distro Watch：<http://www.distrowatch.com>。
+
+2.  你会看到超过 100 个 Linux 发行版的列表。推荐选择一个最小的发行版，而不是流行的版本（CentOS、Ubuntu、Fedora 和 Debian）。这个页面像下面这样：
+
+    ![](img/3-3-1.jpg)
+
+3.  一旦你下载了 ISO，请遵循这一章“熟悉VirtualBox”秘籍中的指南。
+
+
 
 
 
