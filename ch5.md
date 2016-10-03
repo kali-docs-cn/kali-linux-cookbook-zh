@@ -407,8 +407,6 @@ Nessus 允许我们攻击很多种类的漏洞，它们取决于我们的版本�
 
 0.  你会被要求确认，你的测试将会执行（取决于你选择了多少目标，以及要执行多少测试）。
 
-    ![](img/5-3-4.jpg)
-
 1.  一旦完成了，你会收到一份报告，它在 `Reports`标签页中。
 
 2.  双击报告来分析下列要点：
@@ -505,8 +503,6 @@ Nessus 允许我们攻击很多种类的漏洞，它们取决于我们的版本�
     ![](img/5-5-3.jpg)
 
 0.  你会被要求确认，你的测试将会执行（取决于你选择了多少目标，以及要执行多少测试）。
-
-    ![](img/5-3-4.jpg)
 
 1.  一旦完成了，你会收到一份报告，它在 `Reports`标签页中。
 
@@ -825,8 +821,6 @@ OpenVAS 允许我们攻击很多种类的漏洞，它们取决于我们的版本
 
 6.  我们现在打算编辑我们的扫描配置。点击` Network Vulnerabilities`旁边的扳手图标。
 
-    ![](img/5-8-3.jpg)
-
 7.  按下`Ctrl + F`并在查找框中输入`Network `。
 
 8.  对于每个找到的族，点击` Select all NVT's `框中的复选框。族是一组漏洞。选择的漏洞为：
@@ -859,13 +853,13 @@ OpenVAS 允许我们攻击很多种类的漏洞，它们取决于我们的版本
     + `Settings` 
     + `Wireless services`
     
-    ![](img/5-8-4.jpg)
+    ![](img/5-8-3.jpg)
 
 9.  点击`Save Config`。
 
 0.  访问`Configuration | Targets`：
 
-    ![](img/5-8-5.jpg)
+    ![](img/5-8-4.jpg)
     
 1.  创建新的目标并执行下列操作：
 
@@ -895,13 +889,11 @@ OpenVAS 允许我们攻击很多种类的漏洞，它们取决于我们的版本
     
     6.  点击` Create Task`。
     
-    ![](img/5-8-6.jpg)
+    ![](img/5-8-5.jpg)
     
 4.  现在访问` Scan Management | Tasks`。
 
 5.  点击扫描旁边的播放按钮。这里是`Network Vulnerability Scan`：
-
-    ![](img/5-8-7.jpg)
     
 ### 工作原理
 
@@ -914,12 +906,10 @@ OpenVAS 允许我们攻击很多种类的漏洞，它们取决于我们的版本
 1.  访问` Scan Management | Tasks`。
 
 2.  点击`Network Vulnerabilities Scan`旁边的放大镜图标：
-
-    ![](img/5-8-8.jpg)
     
 3.  点击下载箭头来查看报告：
 
-    ![](img/5-8-9.jpg)
+    ![](img/5-8-6.jpg)
 
 ## 5.9 OpenVAS - 发现 Linux 特定漏洞
 
@@ -952,8 +942,6 @@ OpenVAS 允许我们攻击很多种类的漏洞，它们取决于我们的版本
 
 6.  我们现在打算编辑我们的扫描配置。点击`Linux Vulnerabilities`旁边的扳手图标。
 
-    ![](img/5-9-3.jpg)
-
 7.  按下`Ctrl + F`并在查找框中输入`Linux`。
 
 8.  对于每个找到的族，点击` Select all NVT's `框中的复选框。族是一组漏洞。选择的漏洞为：
@@ -984,13 +972,11 @@ OpenVAS 允许我们攻击很多种类的漏洞，它们取决于我们的版本
     + `Wireless services` 
     + `Web Server`
 
-    ![](img/5-9-4.jpg)
+    ![](img/5-9-3.jpg)
 
 9.  点击`Save Config`。
 
 0.  访问`Configuration | Targets`：
-
-    ![](img/5-9-5.jpg)
     
 1.  创建新的目标并执行下列操作：
 
@@ -1020,13 +1006,11 @@ OpenVAS 允许我们攻击很多种类的漏洞，它们取决于我们的版本
     
     6.  点击` Create Task`。
     
-    ![](img/5-9-6.jpg)
+    ![](img/5-9-4.jpg)
     
 4.  现在访问` Scan Management | Tasks`。
 
 5.  点击扫描旁边的播放按钮。这里是`Linux Vulnerability Scan`：
-
-    ![](img/5-9-7.jpg)
     
 ### 工作原理
 
@@ -1039,12 +1023,10 @@ OpenVAS 允许我们攻击很多种类的漏洞，它们取决于我们的版本
 1.  访问` Scan Management | Tasks`。
 
 2.  点击`Linux Vulnerabilities Scan`旁边的放大镜图标：
-
-    ![](img/5-9-8.jpg)
     
 3.  点击下载箭头来查看报告：
 
-    ![](img/5-9-9.jpg)
+    ![](img/5-9-5.jpg)
     
 ## 5.10 OpenVAS - 发现 Windows 特定漏洞
 
@@ -1077,8 +1059,6 @@ OpenVAS 允许我们攻击很多种类的漏洞，它们取决于我们的版本
 
 6.  我们现在打算编辑我们的扫描配置。点击`Windows Vulnerabilities`旁边的扳手图标。
 
-    ![](img/5-10-3.jpg)
-
 7.  按下`Ctrl + F`并在查找框中输入`Windows`。
     
 8.  对于每个找到的族，点击` Select all NVT's `框中的复选框。族是一组漏洞。选择的漏洞为：
@@ -1107,7 +1087,7 @@ OpenVAS 允许我们攻击很多种类的漏洞，它们取决于我们的版本
     + `Windows` 
     + `Windows: Microsoft Bulletins`
 
-    ![](img/5-10-4.jpg)
+    ![](img/5-10-3.jpg)
 
 9.  点击`Save Config`。
 
@@ -1143,13 +1123,11 @@ OpenVAS 允许我们攻击很多种类的漏洞，它们取决于我们的版本
     
     6.  点击` Create Task`。
     
-    ![](img/5-10-6.jpg)
+    ![](img/5-10-4.jpg)
     
 4.  现在访问` Scan Management | Tasks`。
 
 5.  点击扫描旁边的播放按钮。这里是`Windows Vulnerability Scan`：
-
-    ![](img/5-10-7.jpg)
     
 ### 工作原理
 
@@ -1162,9 +1140,7 @@ OpenVAS 允许我们攻击很多种类的漏洞，它们取决于我们的版本
 1.  访问` Scan Management | Tasks`。
 
 2.  点击`Windows Vulnerabilities Scan`旁边的放大镜图标：
-
-    ![](img/5-9-8.jpg)
     
 3.  点击下载箭头来查看报告：
 
-    ![](img/5-9-9.jpg)
+    ![](img/5-9-5.jpg)
