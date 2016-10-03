@@ -692,3 +692,89 @@ gsad --http-only --listen=127.0.0.1 -p 9392
 4.  输入你的密码。
 
 5.  点击`Log in`按钮。
+
+## 5.7 OpenVAS - 发现本地漏洞
+
+OpenVAS 允许我们攻击很多种类的漏洞，它们取决于我们的版本。我们也需要评估的目标漏洞列表限制为针对我们想要获取的信息类型的漏洞。在这个秘籍中，我们将要使用 OpenVAS 扫描目标上的本地漏洞，这些漏洞针对我们当前的本地主机。
+
+### 操作步骤
+
+让我们以使用 OpenVAS 发现本地漏洞开始，首先打开 Firefox 浏览器：
+
+1.  访问<http://127.0.0.1:9392>并登陆 OpenVAS。
+
+2.  访问` Configuration | Scan Configs`。
+
+    ![](img/5-7-1.jpg)
+    
+3.  输入扫描的名称。这个秘籍中，我们使用` Local Vulnerabilities`。
+
+4.  我们选择`Empty, static and fast`选项。这个选项可以让我们从零开始并创建我们自己的配置。
+
+5.  点击` Create Scan Config`：
+
+    ![](img/5-7-2.jpg)
+
+6.  我们现在打算编辑我们的扫描配置。点击` Local Vulnerabilities`旁边的扳手图标。
+
+    ![](img/5-7-3.jpg)
+
+7.  按下`Ctrl + F`并在查找框中输入`Local`。
+
+8.  对于每次找到的本地族，点击` Select all NVT's `框中的复选框。族是一组漏洞。选择的漏洞为：
+
+    + `Compliance` 
+    + `Credentials` 
+    + `Default Accounts` 
+    + `Denial of Service` 
+    + `FTP` 
+    + `Ubuntu Local Security Checks`
+    
+    ![](img/5-7-4.jpg)
+
+9.  点击`Save Config`。
+
+0.  访问`Configuration | Targets`：
+
+    ![](img/5-7-4.jpg)
+    
+1.  创建新的目标并执行下列操作：
+
+    1.  输入目标名称。
+    
+    2.  输入主机，通过下列方式之一：
+    
+        +   输入唯一的地址：`192.168.0.10 `
+        
+        +   输入多个地址，以逗号分隔：`192.168.0.10,192.168.0.115`
+        
+        +   输入地址范围：`192.168.0.1-20`
+        
+2，  点击` Create Target`。
+
+3.  现在选择` Scan Management | New Task`，并执行下列操作：
+
+    1.  输入任务名称。
+    
+    2.  输入注释（可选）。
+    
+    3.  选择你的扫描配置。这里是` Local Vulnerabilities`。
+    
+    4.  选择扫描目标。这里是`Local Network`。
+    
+    5.  所有其他选项保留默认。
+    
+    6.  点击` Create Task`。
+    
+    ![](img/5-7-6.jpg)
+    
+4.  现在访问` Scan Management | Tasks`。
+
+5.  点击扫描旁边的播放按钮。这里是`Local Vulnerability Scan`：
+
+    ![](img/5-7-7.jpg)
+    
+### 工作原理
+
+这个秘籍中，我们启动 OpenVAS 并登入它的 Web 界面。之后我们配置了 OpenVAS 来搜索一系列本地漏洞。最后，我们选择了目标并完成了扫描。OpenVAS 之后扫描了目标系统上已知漏洞，包括我们的 NVT 版本。
+
