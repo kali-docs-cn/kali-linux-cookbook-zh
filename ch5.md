@@ -721,7 +721,7 @@ OpenVAS 允许我们攻击很多种类的漏洞，它们取决于我们的版本
 
 7.  按下`Ctrl + F`并在查找框中输入`Local`。
 
-8.  对于每次找到的本地族，点击` Select all NVT's `框中的复选框。族是一组漏洞。选择的漏洞为：
+8.  对于每个找到的本地族，点击` Select all NVT's `框中的复选框。族是一组漏洞。选择的漏洞为：
 
     + `Compliance` 
     + `Credentials` 
@@ -791,4 +791,133 @@ OpenVAS 允许我们攻击很多种类的漏洞，它们取决于我们的版本
 3.  点击下载箭头来查看报告：
 
     ![](img/5-7-8.jpg)
+
+## 5.8 OpenVAS - 发现网络漏洞
+
+在这个秘籍中，我们将要使用 OpenVAS 扫描目标上的网络漏洞，这些漏洞针对我们目标网络上的设备。
+
+### 准备
+
+为了完成这个秘籍，你需要被测试的虚拟机。
+
++ Windows XP
++ Windows 7
++ Metasploitable 2.0
++ 其它版本的 Linux
+
+### 操作步骤
+
+让我们以使用 OpenVAS 发现网络漏洞开始，首先打开 Firefox 浏览器：
+
+1.  访问<http://127.0.0.1:9392>并登陆 OpenVAS。
+
+2.  访问` Configuration | Scan Configs`。
+
+    ![](img/5-8-1.jpg)
+    
+3.  输入扫描的名称。这个秘籍中，我们使用` Network Vulnerabilities`。
+
+4.  我们选择`Empty, static and fast`选项。这个选项可以让我们从零开始并创建我们自己的配置。
+
+5.  点击` Create Scan Config`：
+
+    ![](img/5-8-2.jpg)
+
+6.  我们现在打算编辑我们的扫描配置。点击` Network Vulnerabilities`旁边的扳手图标。
+
+    ![](img/5-8-3.jpg)
+
+7.  按下`Ctrl + F`并在查找框中输入`Network `。
+
+8.  对于每个找到的族，点击` Select all NVT's `框中的复选框。族是一组漏洞。选择的漏洞为：
+
+    + `Brute force attacks` 
+    + `Buffer overflow` 
+    + `CISCO` 
+    + `Compliance` 
+    + `Credentials` 
+    + `Databases` 
+    + `Default Accounts` 
+    + `Denial of Service` 
+    + `FTP` 
+    + `Finger abuses` 
+    + `Firewalls` 
+    + `Gain a shell remotely` 
+    + `General` 
+    + `Malware` 
+    + `Netware` 
+    + `NMAP NSE` 
+    + `Peer-To-Peer File Sharing` 
+    + `Port Scanners` 
+    + `Privilege Escalation` 
+    + `Product Detection` 
+    + `RPC` 
+    + `Remote File Access`
+    + `SMTP Problems` 
+    + `SNMP` 
+    + `Service detection` 
+    + `Settings` 
+    + `Wireless services`
+    
+    ![](img/5-8-4.jpg)
+
+9.  点击`Save Config`。
+
+0.  访问`Configuration | Targets`：
+
+    ![](img/5-8-4.jpg)
+    
+1.  创建新的目标并执行下列操作：
+
+    1.  输入目标名称。
+    
+    2.  输入主机，通过下列方式之一：
+    
+        +   输入唯一的地址：`192.168.0.10 `
+        
+        +   输入多个地址，以逗号分隔：`192.168.0.10,192.168.0.115`
+        
+        +   输入地址范围：`192.168.0.1-20`
+        
+2，  点击` Create Target`。
+
+3.  现在选择` Scan Management | New Task`，并执行下列操作：
+
+    1.  输入任务名称。
+    
+    2.  输入注释（可选）。
+    
+    3.  选择你的扫描配置。这里是` Network Vulnerabilities`。
+    
+    4.  选择扫描目标。这里是`Local Network`。
+    
+    5.  所有其他选项保留默认。
+    
+    6.  点击` Create Task`。
+    
+    ![](img/5-8-6.jpg)
+    
+4.  现在访问` Scan Management | Tasks`。
+
+5.  点击扫描旁边的播放按钮。这里是`Network Vulnerability Scan`：
+
+    ![](img/5-8-7.jpg)
+    
+### 工作原理
+
+这个秘籍中，我们启动 OpenVAS 并登入它的 Web 界面。之后我们配置了 OpenVAS 来搜索一系列网络漏洞。最后，我们选择了目标并完成了扫描。OpenVAS 之后扫描了目标系统上已知漏洞，包括我们的 NVT 版本。
+
+### 更多
+
+一旦执行了扫描，你可以通过查看报告来观察结果：
+
+1.  访问` Scan Management | Tasks`。
+
+2.  点击`Network Vulnerabilities Scan`旁边的放大镜图标：
+
+    ![](img/5-8-8.jpg)
+    
+3.  点击下载箭头来查看报告：
+
+    ![](img/5-8-8.jpg)
 
