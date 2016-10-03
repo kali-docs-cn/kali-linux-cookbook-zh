@@ -522,3 +522,173 @@ Nessus 允许我们攻击很多种类的漏洞，它们取决于我们的版本�
     
 3.  点击`Reports`主菜单中的` Download Report `。
 
+## 5.6 安装、配置和启动 OpenVAS
+
+OpenVAS，即开放漏洞评估系统，是一个用于评估目标漏洞的杰出框架。它是 Nessus 项目的分支。不像 Nessus，OpenVAS提供了完全免费的版本。由于 OpenVAS 在Kali Linux中成为标准，我们将会以配置开始。
+
+### 准备
+
+需要网络连接。
+
+### 操作步骤
+
+让我们开始安装、配置和启动 OpenVAS，首先在终端窗口中访问它的路径。
+
+1.  OpenVAS 默认安装，并且只需要配置便于使用。
+
+2.  在终端窗口中，将路径变为 OpenVAS 的路径：
+
+    ```
+    cd /usr/share/openvas
+    ```
+    
+3.  执行下列命令：
+
+    ```
+    openvas-mkcert
+    ```
+    
+    这一步我们为 OpenVAS 创建了 SSL 证书。
+    
+    1.  保留 CA 的默认生命周期。
+    
+    2.  更新整数的生命周期，来匹配 CA 证书的天数：`1460`。
+    
+    3.  输入国家或地区。
+    
+    4.  输入州或省。
+    
+    5.  组织名称保留默认。
+    
+    6.  你会看到整数确认界面，之后按下回车键来退出。
+    
+    ![](img/5-6-1.jpg)
+    
+4.  执行下列命令：
+
+    ```
+    openvas-nvt-sync
+    ```
+    
+    这会将 OpenVAS NVT 数据库和当前的 NVT 版本同步。也会更新到最新的漏洞检查。
+    
+    ![](img/5-6-2.jpg)
+
+5.  执行下列命令：
+
+    ```
+    openvas-mkcert-client -n om -i 
+    openvasmd -rebuild
+    ```
+    
+    这会生成客户证书并分别重构数据库。
+    
+6.  执行下列命令：
+
+    ```
+    openvassd
+    ```
+    
+    这会启动 OpenVAS 扫描器并加载所有插件（大约 26406 个），所以会花一些时间。
+    
+7.  执行下列命令：
+
+    ```
+    openvasmd --rebuild 
+    openvasmd --backup
+    ```
+    
+8.  执行下列命令来创建你的管理员用户（我们使用 `openvasadmin`）：
+
+    ```
+    openvasad -c  'add_user' -n openvasadmin -r admin
+    ```
+    
+    ![](img/5-6-3.jpg)
+    
+9.  执行下列命令：
+
+    ```
+    openvas-adduser
+    ```
+    
+    这会让你创建普通用户：
+    
+    1.  输入登录名称。
+    
+    2.  在校验请求上按下回车键（这会自动选择密码）。
+    
+    3.  输入两次密码。
+    
+    4.  对于规则，按下`Ctrl + D`。
+    
+    5.  按下`Y`来添加用户。
+    
+    ![](img/5-6-4.jpg)
+
+0.  执行下列命令来配置 OpenVAS 的交互端口：
+
+    ```
+    openvasmd -p 9390 -a 127.0.0.1 
+    openvasad -a 127.0.0.1 -p 9393 
+    gsad --http-only --listen=127.0.0.1 -p 9392
+    ```
+    
+    > 9392 是用于 Web 浏览器的推荐端口，但是你可以自己选择。
+    
+1.  访问<http://127.0.0.1:9392>，在你的浏览器中查看 OpenVAS 的 Web 界面。
+
+    ![](img/5-6-5.jpg)
+    
+### 工作原理
+
+在这个秘籍中，我们以打开终端窗口并通过仓库安装 OpenVAS 来开始。之后我们创建了一个证书并安装我们的插件数据库。然后，我们创建了一个管理员和一个普通用户账号。最后，我们启动了 OpenVAS 的 Web 界面并展示了登录界面。
+
+> 每次你在 OpenVAS 中执行操作的时候，你都需要重建数据库。
+
+### 更多
+
+这一节展示了除了启动 OpenVAS 之外的一些附加信息。
+
+**编写 SSH 脚本来启动 OpenVAS**
+
+每次你打算启动 OpenVAS 的时候，你需要：
+
+1.  同步 NVT 版本（这非常不错，因为这些项目会在新漏洞发现的时候更改）。
+
+2.  启动 OpenVAS 扫描器。
+
+3.  重建数据库。
+
+4.  备份数据库。
+
+5.  配置你的端口。
+
+为了节省时间，下面的简单 Bash 脚本可以让你启动 OpenVAS。把文件保存为` OpenVAS.sh`，并放在你的`/root`文件夹中：
+
+```sh
+#!/bin/bash 
+openvas-nvt-sync 
+openvassd 
+openvasmd --rebuild 
+openvasmd --backup 
+openvasmd -p 9390 -a 127.0.0.1 
+openvasad -a 127.0.0.1 -p 9393 
+gsad --http-only --listen=127.0.0.1 -p 9392
+```
+
+**使用 OpenVAS 桌面**
+
+你可以选择通过 OpenVAS 桌面来执行相同步骤。OpenVAS 桌面是一个 GUI 应用。为了启动这个应用：
+
+1.  在 Kali Linux 的桌面的启动菜单中，访问`Applications | Kali Linux | Vulnerability Assessment | Vulnerability Scanners | OpenVAS | Start GreenBone Security Desktop`，就像下面展示的那样：
+
+    ![](img/5-6-6.jpg)
+
+2.  将服务器地址输入为`127.0.0.1`。
+
+3.  输入你的用户名。
+
+4.  输入你的密码。
+
+5.  点击`Log in`按钮。
