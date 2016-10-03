@@ -125,9 +125,11 @@
     
 3.  在`Download`菜单项中，选择`Evaluate new products`。
 
+    ![](img/3-2-2.jpg)
+
 4.  在下一个界面中，你可以选择要下载的东西，取决于你想要测试的产品。推荐你选择 Windows Server 2012，Windows 8 和 Windows 7。
 
-    ![](img/3-2-2.jpg)
+    ![](img/3-2-3.jpg)
     
 5.  一旦你下载了 ISO，请遵循这一章“熟悉VirtualBox”秘籍中的指南。
 
