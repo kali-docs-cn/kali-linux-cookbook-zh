@@ -224,7 +224,7 @@ WPA（无线保护访问）于 2003 年诞生，并且为保护无线网络和�
     python gerix.py
     ```
     
-    ![](img/5-3-1.jpg)
+    ![](img/9-3-1.jpg)
     
 6.  点击`Configuration`（配置）标签页。
 
@@ -238,7 +238,7 @@ WPA（无线保护访问）于 2003 年诞生，并且为保护无线网络和�
 
 1.  点击 WEP 标签页。
 
-    ![](img/5-3-2.jpg)
+    ![](img/9-3-2.jpg)
 
 2.  在` Functionalities`（功能）中，点击` Start Sniffing and Logging `（开启嗅探和记录）按钮。
 
