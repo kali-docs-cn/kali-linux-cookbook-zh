@@ -288,7 +288,7 @@ Hydra 支持许多协议，包括（但不仅限于）FTP、HTTP、HTTPS、MySQL
     set outfile /root/Desktop/fromwillie.txt
     ```
     
-    ![](img/8-4-5.jpg)
+    ![](img/8-4-15.jpg)
     
 8.  最后，我们开始攻击。
 
