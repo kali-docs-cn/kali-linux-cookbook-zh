@@ -169,6 +169,135 @@ Hydra 支持许多协议，包括（但不仅限于）FTP、HTTP、HTTPS、MySQL
 + Generic Wrapper
 + Web form
 
+## 8.4 密码分析
+
+这个秘籍中，我们会学到如何在密码攻击之前分析密码。密码分析的目的是允许我们通过收集目标机器、业务以及其它的信息来得到更小的单词列表。在我们的教程中，我们会使用 Ettercap 和 它的 ARP 毒化功能来嗅探流量。
+
+### 准备
+
+这个秘籍需要局域网的链接。
+
+### 操作步骤
+
+让我们启动 Ettercap 来进行密码分析。
+
+1.  我们以配置 Ettercap 来开始这个秘籍。首先，我们找到它的配置文件并用 VIM 编辑它。
+
+    ```
+    locate etter.conf 
+    vi /etc/etterconf
+    ```
+    
+    要注意，你的位置可能不同。
+
+2.  将`ec_uid`和`ec_gid`改为`0`。
+
+    ![](img/8-4-1.jpg)
+
+3.  下面我们需要取消下面的 IPTABLES 行的注释。它在靠近文件末尾的` LINUX `一节。
+
+    ![](img/8-4-2.jpg)
+    
+4.  现在，我们将要启动 Ettercap。使用`-G`选项，加载图形化界面（GUI）。
+
+    ![](img/8-4-3.jpg)
+
+5.  我们开启统一嗅探。你可以按下`Shift + U`或者访问菜单栏中的`Sniff | Unified sniffing...`。
+
+    ![](img/8-4-4.jpg)
+
+6.  选择网络接口。
+
+    ![](img/8-4-5.jpg)
+
+7.  下面，我们开始`Scan for hosts`（扫描主机），这可以通过按下`Ctrl + S`或访问菜单栏的`Hosts | Scan for hosts`来完成。
+
+    ![](img/8-4-6.jpg)
+
+8.  现在我们能够让 Ettercap 开始嗅探了。你可以按下`Ctrl + W`或访问菜单栏的`Start | Start Sniffing`（开始嗅探）。
+
+    ![](img/8-4-7.jpg)
+
+9.  最后，我们开始进行 ARP 毒化。访问菜单栏的`Mitm | Arp poisoning`（ARP 毒化）。
+
+    ![](img/8-4-8.jpg)
+
+0.  在出现的窗口中，选中`Sniff  remote connections`（嗅探远程连接）的选项。
+
+    ![](img/8-4-9.jpg)
+
+1.  取决于网络情况，我们会看到信息。
+
+    ![](img/8-4-10.jpg)
+
+2.  一旦我们找到了我们想找的信息（用户名和密码）。我们会关闭 Ettercap。你可以按下`Ctrl + E`或者访问菜单栏的` Start | Stop sniffing`（停止嗅探）来完成。
+
+    ![](img/8-4-11.jpg)
+    
+3.  现在我们需要关闭 ARP 毒化来使网络恢复正常。
+
+    ![](img/8-4-12.jpg)
+
+### 工作原理
+
+这个秘籍中，我们使用 Ettercap 来毒化网络并偷取网络上的用户名和密码。我们以寻找和修改 Ettercap 的配置文件来开始。之后我们启动了 Ettercap 并使用 ARP 毒化执行中间人（MITM）攻击。由于流量被重定向到我们的主机，当用户名和密码在网络上传播时，我们就能够看到它们。
+
+### 更多
+
+我们也可以使用  Metasploit 来分析用户名和面。我们会通过使用搜索邮件收集器模块来执行它。
+
+1.  打开终端窗口并启动  MSFCONSOLE：
+
+    ```
+    msfconsole
+    ```
+    
+2.  搜索邮件收集器；
+
+    ```
+    search email collector
+    ```
+
+    ![](img/8-4-13.jpg)
+
+3.  键入下列命令来使用搜索邮件收集器模块：
+
+    ```
+    use auxiliary/gather/search_email_collector 
+    ```
+    
+4.  展示该模块可用的选项：
+
+    ```
+    show options
+    ```
+
+    ![](img/8-4-14.jpg)
+    
+5.  下面我们设置域名。如果不想被有关部门查水表的话，请小心选择域名。
+
+6.  将域名设为你希望的域名：
+
+    ```
+    set domain  gmail.com
+    ```
+    
+7.  设置输入文件。这并不是必需的。如果你打算运行多个攻击，或打算稍后也能运行某个攻击，推荐设置它。
+
+    ```
+    set outfile /root/Desktop/fromwillie.txt
+    ```
+    
+    ![](img/8-4-5.jpg)
+    
+8.  最后，我们开始攻击。
+
+    ```
+    run
+    ```
+
+    ![](img/8-4-16.jpg)
+
 ## 8.5 使用 John the Ripper 破解 Windows 密码
 
 这个秘籍中，我们会使用 John the Ripper 来破解 Windows 安全访问管理器（SAM）文件。SAM文件储存了目标系统用户的用户名和密码的哈希。出于安全因素，SAM文件使用授权来保护，并且不能在 Windows 系统运行中直接手动打开或复制。
