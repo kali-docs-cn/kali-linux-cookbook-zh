@@ -168,3 +168,144 @@ Hydra 支持许多协议，包括（但不仅限于）FTP、HTTP、HTTPS、MySQL
 + VNC
 + Generic Wrapper
 + Web form
+
+## 8.5 使用 John the Ripper 破解 Windows 密码
+
+这个密集中，我们会使用 John the Ripper 来破解 Windows 安全访问管理器（SAM）文件。SAM文件储存了目标系统用户的用户名和密码的哈希。出于安全因素，SAM文件使用授权来保护，并且不能在 Windows 系统运行中直接手动打开或复制。
+
+### 准备
+
+你将会需要访问 SAM 文件。
+
+这个秘籍中，我们假设你能够访问某台 Windows 主机。
+
+### 操作步骤
+
+让我们开始使用 John the Ripper 破解 Windows SAM 文件。我们假设你能够访问某台 Windows 主机，通过远程入侵，或者物理接触，并且能够通过 USB 或 DVD 驱动器启动 Kali Linux。
+
+1.  看看你想挂载哪个硬盘：
+
+    ```
+    Fdisk -l
+    ```
+    
+2.  挂载该硬盘，并将`target`设为它的挂载点。
+
+    ```
+    mount /dev/sda1 /target/ 
+    ```
+    
+3.  将目录改为 Windows SAM 文件的位置：
+
+    ```
+    cd /target/windows/system32/config 
+    ```
+    
+4.  列出目录中所有内容。
+
+    ```
+    ls –al
+    ```
+    
+5.  使用 SamDump2 来提取哈希，并将文件放到你的 root 用户目录中的一个叫做`hashes`的文件夹中。
+
+    ```
+    samdump2 system SAM > /root/hashes/hash.txt
+    ```
+    
+6.  将目录改为 John the Ripper 所在目录。
+
+7.  运行 John the Ripper：
+
+    ```
+    ./john /root/hashes/hash.txt 
+    ./john /root/hashes/hash.txt–f:nt  (If attacking a file on a NTFS System) 
+    ```
+    
+## 8.6 字典攻击
+
+这个秘籍中，我们会进行字典或单词列表的攻击。字典攻击使用事先准备的密码集合，并尝试使用单词列表爆破与指定用户匹配的密码。所生成的字典通常由三种类型：
+
+    +   只有用户名：列表只含有用户名。
+    +   只有密码：列表只含有密码。
+    +   用户名和密码：列表含有生成的用户名和密码。
+    
+出于演示目的，我们使用 Crucnch 来生成我们自己的密码字典。
+
+### 准备
+
+需要在 Kali 上安装 Crunch。
+
+### 操作步骤
+
+Kali 的好处是已经安装了 Crunch，不像 BackTrack。
+
+1.  打开终端窗口，并输入`crunch`命令来查看 Crunch 的帮助文件。
+
+    ```
+    crunch
+    ```
+    
+    ![](img/8-6-1.jpg)
+    
+2.  使用 Crunch 生成密码的基本语法是，`[minimum length] [maximum length] [character set] [options] `。
+
+3.  Crunch 拥有几种备选选项。一些常用的如下：
+
+    +   `-o`：这个选项允许你指定输出列表的文件名称和位置、
+    
+    +   `-b`：这个选项允许你指定每个文件的最大字节数。大小可以以 KB/MB/GB 来指定，并且必须和`-o START`触发器一起使用。
+    
+    +   `-t`：这个选项允许你指定所使用的模式。
+    
+    +   `-l`：在使用`-t`选项时，这个选项允许你将一些字符标识为占位符（`@`，`%`，`^`）。
+    
+4.  下面我们执行命令来在桌面上创建密码列表，它最少 8 个字母，最大 10 个字符，并且使用字符集`ABCDEFGabcdefg0123456789`。
+
+    ```
+    crunch 8 10 ABCDEFGabcdefg0123456789 –o /root/Desktop/ generatedCrunch.txt
+    ```
+    
+    ![](img/8-6-2.jpg)
+    
+5.  一旦生成了文件，我们使用 Nano 来打开文件：
+
+    ```
+    nano /root/Desktop/generatedCrunch.txt
+    ```
+    
+### 工作原理
+
+这个秘籍中我们使用了 Crunch 来生成密码字典列表。
+
+## 8.7 使用彩虹表
+
+这个秘籍中我们会学到如何在 Kali 中使用彩虹表。彩虹表是特殊字典表，它使用哈希值代替了标准的字典密码来完成攻击。出于演示目的，我们使用 RainbowCrack 来生成彩虹表。
+
+### 操作步骤
+
+1.  打开终端窗口并将目录改为`rtgen`的目录：
+
+    ```
+    cd /usr/share/rainbowcrack/
+    ```
+    
+    ![](img/8-7-1.jpg)
+    
+2.  下面我们要启动`rtgen`来生成基于 MD5 的彩虹表。
+
+    ```
+    ./rtgen md5 loweralpha-numeric 1 5 0 3800 33554432 0
+    ```
+    
+    ![](img/8-7-2.jpg)
+    
+3.  一旦彩虹表生成完毕，你的目录会包含`.rt`文件。这取决于用于生成哈希的处理器数量，大约需要 2~7 个小时。
+
+4.  为了开始破解密码，我们使用`rtsort`程序对彩虹表排序，使其更加易于使用。
+
+### 工作原理
+
+这个秘籍中，我们使用了 RainbowCrack  攻击来生成、排序和破解 MD5 密码。RainbowCrack 能够使用彩虹表破解哈希，基于一些预先准备的哈希值。我们以使用小写字母值生成 MD5 彩虹表来开始。在秘籍的末尾，我们成功创建了彩虹表，并使用它来破解哈希文件。
+
+
