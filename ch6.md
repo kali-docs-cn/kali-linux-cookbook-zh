@@ -113,3 +113,165 @@
 ### 另见
 
 为了了解更多 Meterpreter 的信息，请见“掌握 Meterpreter”一节。
+
+## 6.3 掌握  Metasploit 控制台（MSFCONSOLE）
+
+这个秘籍中，我们会研究 Metasploit 控制台（MSFCONSOLE）。MSFCONSOLE主要用于管理 Metasploit 数据库，管理会话以及配置和启动 Metasploit 模块。本质上，出于利用漏洞的目的，MSFCONSOLE 能够让你连接到主机，便于你利用它的漏洞。
+
+你可以使用以下命令来和控制台交互：
+
++   `help`：这个命令允许你查看你尝试运行的命令行的帮助文档。
+
++   `use module`：这个命令允许你开始配置所选择的模块。
+
++   `set optionname module`：这个命令允许你为指定的模块配置不同的选项。
+
++   `exploit`：这个命令启动漏洞利用模块。
+
++   `run`：这个命令启动非漏洞利用模块。
+
++   `search module`：这个命令允许你搜索独立模块。
+
++   `exit`：这个命令允许你退出 MSFCONSOLE。
+
+### 准备
+
+需要互联网或内部网络的连接。
+
+### 操作步骤
+
+让我们开始探索  MSFCONSOLE：
+
+1.  打开命令行。
+
+2.  通过下列命令启动 MSFCONSOLE：
+
+    ```
+    msfconsole
+    ```
+    
+3.  通过`search`命令搜索所有可用的 Linux 模块。每次我们打算执行操作时，都搜索一遍模块通常是个好主意。主要因为在 Metasploit 的不同版本之间，模块路径可能发生改变。
+
+    ```
+    search linux
+    ```
+    
+    ![](img/6-3-1.jpg)
+    
+4.  使用 John the Ripper Linux 密码破解模块。
+
+    ```
+    use auxiliary/analyzse/jtr_linux
+    ```
+    
+    ![](img/6-3-2.jpg)
+    
+5.  通过下列命令展示该模块的可用选项。
+
+    ```
+    show options
+    ```
+    
+    ![](img/6-3-3.jpg)
+    
+6.  既然我们列出了可以对这个模块使用的选项，我们可以使用`set`命令来设置独立选项。让我们设置`JOHN_PATH`选项：
+
+    ```
+    set JOHN_PATH /usr/share/metasploit-framework/data/john/wordlists/ password.lst
+    ```
+    
+7.  现在执行漏洞利用，我们需要输入`exploit`命令：
+
+    ```
+    exploit
+    ```
+    
+### 更多
+
+一旦你通过 MSFCONSOLE 获得了主机的访问，你需要使用 Meterpreter 来分发载荷。MSFCONSOLE 可以管理你的回话，而 Meterpreter 执行实际的载荷分发和漏洞利用工作。
+
+## 6.4 掌握 Metasploit CLI（MSFCLI）
+
+这个秘籍中，我们会探索 Metasploit CLI（MSFCLI）。Metasploit 需要接口来执行它的任务。MSFCLI 就是这样的接口。它是一个极好的接口，用于学习 Metasploit ，或测试/编写新的漏洞利用。它也可用于脚本的情况中，并且对任务使用基本的自动化。
+
+使用 MSFCLI 的一个主要问题是，你只能够一次打开一个 shell。你也会注意到，当我们探索一些命令的时候，它比 MSFCONSOLE 慢并且复杂。最后，你需要知道你打算利用的具体漏洞来使用 MSFCLI。这会使它对于渗透测试新手有些难以使用，他们并不熟悉 Metasploit  漏洞利用列表。
+
+MSFCLI 的一些命令是：
+
++   `msfcli`：这会加载 MSFCLI 可访问的所有可用漏洞利用列表。
+
++   `msfcli -h`：显示 MSFCLI 的帮助文档。
+
++   `msfcli [PATH TO EXPLOIT] [options = value]`：这是启动漏洞利用的语法。
+
+### 准备
+
+需要互联网或内部网络的连接。
+
+### 操作步骤
+
+让我们开始探索  MSFCLI：
+
+1.  使用下列命令启动 Metasploit CLI （MSFCLI）。请耐心等待，因为这可能花一些时间，取决于你的系统速度。同时注意当 MSFCLI 加载完成时，会显示可用的漏洞利用列表。
+
+    ```
+    msfcli
+    ```
+    
+    ![](img/6-4-1.jpg)
+    
+2.  显示 MSFCLI 帮助文档：
+
+    ```
+    msfcli -h
+    ```
+    
+    ![](img/6-4-2.jpg)
+
+3.  出于我们的演示目的，我们会执行圣诞树扫描（ Christmas Tree Scan）。我们会选择选项 A 来显示模块高级选项。
+
+    ```
+    msfcli auxiliary/scanner/portscan/xmas A
+    ```
+    
+    > 更多圣诞树扫描的信息，请见下面的 URL：<http://en.wikipedia.org/wiki/Christmas_tree_packet>。
+    
+    ![](img/6-4-3.jpg)
+    
+4.  此外，你可以列出当前模块的概览，通过使用`S`模式。概览模式是一个极好方式，来查看可用于当前尝试执行的漏洞利用的所有选项。许多选项都是可选的，但是一小部分通常是必须的，它们允许你设置尝试利用哪个目标或端口的漏洞。
+
+    ```
+    msfcli auxiliary/scanner/portscan/xmas S
+    ```
+    
+    ![](img/6-4-4.jpg)
+    
+5.  为了展示可用于此次漏洞利用的选项列表，我们使用`O`模式。选项使用中配置漏洞利用模块的方式。每个利用模块都用不同的选项集合（或者什么都没有）。任何所需的选项必须在漏洞利用执行之前设置。在下面的截图中，你会注意到许多所需选项都设为默认。如果你碰到了这种情况，你就不需要更新选项的值，除非你打算修改它。
+
+    ```
+    msfcli auxiliary/scanner/portscan/xmas O
+    ```
+    
+    ![](img/6-4-5.jpg)
+    
+6.  我们使用`E`模式来执行漏洞利用。
+
+    ```
+    msfcli auxiliary/scanner/portscan/xmas E
+    ```
+    
+    > 这里，我们使用了默认选项。
+    
+### 工作原理
+
+这个秘籍中，我们以启动 MSFCLI 开始，之后搜索可用的模块，并执行该模块。在搜索的过程中，我们选修了圣诞树扫描模块并复查了 MSFCLI 界面来查看模块概览和所有可用选项。在设置完所有选项之后，我们运行了漏洞利用。
+
+了解 Metasploit 框架分为三个不同的部分非常重要。这些部分是：
+
++   漏洞：这些都是弱点，要么已知要么位置。它们包含在特定的应用、阮家宝或协议中。在 Metasploit 中，漏洞按照分组，和漏洞利用列出，漏洞利用可以攻击列在它们下面的漏洞。
+
++   漏洞利用：漏洞利用是用来利用所发现漏洞的模块。
+
++   载荷：一旦成功运行了漏洞利用，必须把载荷传给被攻击的机器，以便允许我们创建 shell，运行各种命令，添加用户以及其它。
+
+一旦你通过 MSFCONSOLE 获得了主机的访问，你需要使用 Meterpreter 来分发载荷。MSFCONSOLE 可以管理你的回话，而 Meterpreter 执行实际的载荷分发和漏洞利用工作。
